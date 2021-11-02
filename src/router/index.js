@@ -1,25 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Front from '../views/Front.vue'
+import Login from '../views/Login.vue'
+
+import zakatRoute from './zakatRoute.js'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Front',
+    component: Front
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+
+  ...zakatRoute
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+// Middleware in vue
+router.beforeEach((to) => {
+  // get meta data from route file
+  if (to.meta.requiresToken) {
+    // if 'token' not in localstorage
+    if (!localStorage.getItem('token')) {
+      // Redirect if not login
+      return '/login?error=dare'
+    }
+  } 
 })
 
 export default router
