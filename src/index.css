@@ -2,3 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+      font-family: "materialdesignicons";
+      font-weight: 100;
+      src:    url("./assets/fonts/materialdesignicons-webfont.ttf") format("ttf"),
+              url("./assets/fonts/materialdesignicons-webfont.woff2") format("woff2");
+  }
+}

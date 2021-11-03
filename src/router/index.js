@@ -4,6 +4,8 @@ import Login from '../views/Login.vue'
 
 import zakatRoute from './zakatRoute.js'
 
+import DigitalScientiaRoute from './projects/digitascientia.js'
+
 const routes = [
   {
     path: '/',
@@ -16,7 +18,9 @@ const routes = [
     component: Login
   },
 
-  ...zakatRoute
+  ...zakatRoute,
+
+  ...DigitalScientiaRoute,
 ]
 
 const router = createRouter({

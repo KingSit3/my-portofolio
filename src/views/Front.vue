@@ -64,11 +64,20 @@
       <div class="my-10 text-center space-y-3">
         <span class="text-3xl font-bold">Zakat</span>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
-            <router-link to="/calculate" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Calculate</router-link>
+            <router-link to="/calculate" class="shadow-red py-10 w-3/4 bg-purple-700 rounded-lg text-center">Calculate</router-link>
             <router-link to="/zakatadmin" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Admin</router-link>
         </div> 
       </div>
       <!-- End Zakat Project -->
+
+      <!-- Project -->
+      <div class="my-10 text-center space-y-3">
+        <span class="text-3xl font-bold">Zakat</span>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
+            <router-link to="/digitascientia" class="shadow-red py-10 w-3/4 bg-purple-700 rounded-lg text-center">digitascientia</router-link>
+        </div> 
+      </div>
+      <!-- End Project -->
 
     </div>
   </div>

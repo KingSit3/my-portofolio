@@ -11,7 +11,7 @@ import zakatCalculate from '../views/zakat/ZakatCalculate.vue'
 const route = [
   // Zakat Page Links
   {
-    path: '/zakatCalculate',
+    path: '/calculate',
     name: 'zakatCalculate',
     component: zakatCalculate,
     meta: { requiresToken: true }
