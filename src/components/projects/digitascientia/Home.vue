@@ -1,11 +1,11 @@
 <template>
-
+  {{ openModal }}
   <!-- Hero Section -->
   <section class="text-center pb-10">
     <h3 class="font-bold text-2xl text-gray-400">DIGITA SCIENTIA INDONESIA</h3>
     <h2 class="font-bold text-4xl mt-3">We Provide Creative <span class="text-[#2f55d4]">Solutions</span></h2>
     <p class="my-5">Is an Innovative national Company that lead digital transformation by providing digital products and services <br> (Information Management System, Internet of Things and Artificial Intelligence).</p>
-    <button class="bg-[#2f55d4] p-2 px-5 mt-5 rounded-md text-white font-semibold duration-200 hover:-translate-y-1.5 hover:shadow-blue">Lihat Video</button>
+    <button @click="openModal = true" class="bg-[#2f55d4] p-2 px-5 mt-5 rounded-md text-white font-semibold duration-200 hover:-translate-y-1.5 hover:shadow-blue">Lihat Video</button>
     <div class="flex justify-center px-20">
       <img src="@/assets/images/projects/digitascientia/svgs/biologist-bro.svg" alt="Hero Image" class="max-w-[800px]">
     </div>
@@ -34,65 +34,148 @@
   </section>
   <!-- End Products Section -->
 
+  <!-- Learn More Section -->
+  <section class="flex justify-between items-center space-x-2 bg-[#f9f2e6] my-10 p-10 max-w-[1200px] mx-auto">
+    <div class="w-1/2">
+      <h2 class="font-bold text-2xl">Why We <br>Need OribitaLIMS</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae autem nemo cum fuga temporibus distinctio vitae voluptatem, accusamus optio ipsam quos ab dignissimos nisi illum corporis sunt iure saepe praesentium sed! Enim qui unde animi, ab cum dolorum non autem!</p>
+    </div>
+    <div class="w-1/2">
+      <img src="@/assets/images/projects/digitascientia/svgs/biologist-bro.svg" alt="LearnMorePoster">
+    </div>
+  </section>
+  <!-- End Learn More Section -->
+
   <!-- Sukses Section -->
-  <section class="text-center">
+  <!-- <section class="text-center">
       <div class="max-w-[1200px] mx-auto text-center py-20">
         <h3 class="text-[#2f55d4] font-semibold uppercase">Sukses</h3>
         <h2 class="text-3xl font-bold">Kami sukses bersama Anda</h2>
         <p class="text-black/50 mt-3">Berikan peluang kenapa kami untuk mewujudkan prestasi Anda.</p>
-        <div class="flex justify-between items-center mt-10">
+        <div class="flex justify-between items-center mt-10"> -->
+        <!-- Left Section -->
+        <!-- <div class="w-1/2 text-left">
+          <h2 class="font-semibold text-2xl">Terus berkembang <br> bersama bisnis-bisnis di Indonesia</h2>
+          <p class="text-black/50 mt-3">Kami hadir untuk memudahkan semua bisnis dan perusahaan di Indonesia untuk dapat terus berkembang.</p>
 
-          <!-- Left Section -->
-          <div class="w-1/2 text-left">
-            <h2 class="font-semibold text-2xl">Terus berkembang <br> bersama bisnis-bisnis di Indonesia</h2>
-            <p class="text-black/50 mt-3">Kami hadir untuk memudahkan semua bisnis dan perusahaan di Indonesia untuk dapat terus berkembang.</p>
-
-            <div class="flex items-center space-x-5 mt-5">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#34d1bf]" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-              <div>
-                <p class="font-bold text-xl">300+</p>
-                <p class="text-black/50">Bisnis berkembang bersama Kami</p>
-              </div>
+          <div class="flex items-center space-x-5 mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#34d1bf]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <div>
+              <p class="font-bold text-xl">300+</p>
+              <p class="text-black/50">Bisnis berkembang bersama Kami</p>
             </div>
-            <div class="flex items-center space-x-5 mt-5">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#34d1bf]" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-              <div>
-                <p class="font-bold text-xl">5000+</p>
-                <p class="text-black/50">Pengguna terdaftar aktif</p>
-              </div>
-            </div>
-            <div class="flex items-center space-x-5 mt-5">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#34d1bf]" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-              <div>
-                <p class="font-bold text-xl">3500+</p>
-                <p class="text-black/50">sangat puas dengan produk kami</p>
-              </div>
-            </div>
-
           </div>
-          <!-- End Left Section -->
-
-          <!-- Right Section -->
-          <div class="w-1/2">
-            <img src="@/assets/images/projects/digitascientia/svgs/career.svg" alt="Sukses Poster">
+          <div class="flex items-center space-x-5 mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#34d1bf]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <div>
+              <p class="font-bold text-xl">5000+</p>
+              <p class="text-black/50">Pengguna terdaftar aktif</p>
+            </div>
           </div>
-          <!-- End Right Section -->
+          <div class="flex items-center space-x-5 mt-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#34d1bf]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <div>
+              <p class="font-bold text-xl">3500+</p>
+              <p class="text-black/50">sangat puas dengan produk kami</p>
+            </div>
+          </div>
 
-        </div>
+        </div> -->
+        <!-- End Left Section -->
+
+        <!-- Right Section -->
+        <!-- <div class="w-1/2">
+          <img src="@/assets/images/projects/digitascientia/svgs/career.svg" alt="Sukses Poster">
+        </div> -->
+        <!-- End Right Section -->
+
+        <!-- </div>
       </div>
-  </section>
+  </section> -->
   <!-- Sukses Section -->
+
+  <!-- Image Slider -->
+  <section>
+    <h2 class="text-2xl text-center py-5 z-10">Our <span class="font-bold">Customers</span></h2>
+    <vueper-slides 
+      class="no-shadow mt-10 max-w-[1200px] mx-auto"
+      :touchable="false"
+      :pauseOnHover="false"
+      :visible-slides="3"
+      :gap="3"
+      :slideRatio="1/5"
+      fixedHeight= "200px"
+
+      autoplay
+      infinite
+      lazy 
+      lazy-load-on-drag
+      :arrows="false"
+      :bullets="false"
+      :duration= 3000
+    >
+      <vueper-slide 
+        v-for="slide in slides" 
+        :key="slide.id"
+        class="object-fill"
+      >
+
+      <template #content>
+        <div class="flex flex-col justify-between items-center">
+          <img :src="slide.gambar" class="max-w-40 max-h-20">
+          <span class="font-semibold">{{ slide.title }}</span>
+        </div>
+      </template>
+      </vueper-slide>
+
+    </vueper-slides>
+  </section>
+  <!-- End Image Slider  -->
+
+  <!-- <div class="fixed inset-0 z-10 overflow-y-auto">
+    <Dialog :open="openModal">
+      <DialogOverlay @click="openModal = false"/>
+
+      <DialogDescription>
+        This will permanently deactivate your account
+      </DialogDescription>
+
+      <p>
+        Are you sure you want to deactivate your account? All of your data will be
+        permanently removed. This action cannot be undone.
+      </p>
+
+      <button @click="openModal = false">Cancel</button>
+    </Dialog>
+  </div> -->
 
 </template>
 
 <script>
+import { VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css'
+
+import {
+    // Dialog,
+    // DialogOverlay,
+    // DialogDescription,
+  } from "@headlessui/vue";
+
 export default {
+  components: { 
+    VueperSlides, 
+    VueperSlide,
+    // Dialog,
+    // DialogOverlay,
+    // DialogDescription,
+  },
+
   data() {
     return {
       productsGridData:[
@@ -126,12 +209,49 @@ export default {
           image: require('@/assets/images/projects/digitascientia/svgs/consulting.svg'),
           caption: 'The new international standard for Occupational Health and Safety Management Systems was published on March 12, 2018 by the International Organization for Standardization (ISO)',
         },
-      ]
+      ],
+
+      slides: [
+        {
+          title: 'Politeknik AKA Bogor',
+          gambar: require('@/assets/images/projects/digitascientia/partner-itppadang-min.png')
+        },
+        {
+          title: 'Sky Pacific indonesia',
+          gambar: require('@/assets/images/projects/digitascientia/partner-sky.png')
+        },
+        {
+          title: 'Total Enviro Solusindo',
+          gambar: require('@/assets/images/projects/digitascientia/partner-tes.png')
+        },
+        {
+          title: 'Institut Teknologi Padang',
+          gambar: require('@/assets/images/projects/digitascientia/partner-itppadang-min.png')
+        },
+        {
+          title: 'DLHK Karawang',
+          gambar: require('@/assets/images/projects/digitascientia/partner-karawang.png')
+        },
+        {
+          title: 'DLHP Sumatera Selatan',
+          gambar: require('@/assets/images/projects/digitascientia/partner-sumsel.png')
+        },
+        {
+          title: 'DLHK Tanah Bumbu',
+          gambar: require('@/assets/images/projects/digitascientia/partner-tanahbumbu.png')
+        },
+        {
+          title: 'Solusi Bangun Indonesia',
+          gambar: require('@/assets/images/projects/digitascientia/partner-sbi.png')
+        },
+        {
+          title: 'Pertamina Hulu Energi Jambi Merang',
+          gambar: require('@/assets/images/projects/digitascientia/partner-pertamina.png')
+        },
+      ],
+
+      openModal: false
     }
   },
 }
 </script>
-
-<style>
-
-</style>
