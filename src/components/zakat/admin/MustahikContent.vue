@@ -1,7 +1,11 @@
 <template>
   
   <!-- Content -->
-  <div class="mt-8">
+  <div>
+
+    <!-- Tambah Button -->
+    <button @click="modalOpen = true; modalHeader = 'tambah'" class="bg-blue-500 p-1.5 px-5 my-2 text-white rounded-lg font-semibold focus:outline-none">Tambah Mustahik</button>
+    <!-- End Tambah Button -->
 
     <!-- Tab & Search -->
     <div class="flex justify-between">
@@ -37,9 +41,8 @@
             <th class="p-1.5 w-[5%] bg-gray-200 rounded-tl-lg">No</th>
             <th class="w-[25%] bg-gray-200">Nama keluarga</th>
             <th class="w-[30%] bg-gray-200">Alamat</th>
-            <th class="w-[10%] bg-gray-200">Anggota Keluarga</th>
-            <th class="w-[10%] bg-gray-200">Jumlah Zakat</th>
-            <th class="w-[15%] bg-gray-200">Tanggal Zakat</th>
+            <th class="w-[20%] bg-gray-200">Jumlah Anggota Keluarga</th>
+            <th class="w-[15%] bg-gray-200">Jumlah Terima Zakat</th>
             <th class="w-[20%] bg-gray-200 rounded-tr-lg">Aksi</th>
           </tr>
         </thead>
@@ -50,10 +53,10 @@
         <tbody v-if="items.length > 0 && !isLoading">
           <tr v-for="(item, index) in items" :key="index" class="text-sm mb-16 text-center cursor-default even:bg-gray-100 duration-150">
             <td class="py-2 truncate px-1"> {{ (index + 1)  + (perPage * (currentPage - 1)) }} </td>
-            <td class="py-2 truncate px-1"> {{ item.nama ? item.nama : '-'  }} </td>
-            <td class="truncate px-1"> {{ item.jenis ? item.jenis : '-'  }} </td>
-            <td class="truncate px-1"> {{ item.jenis == 'uang' ? convertToCurrency(item.jumlah) : item.jumlah }} </td>
-            <td class="truncate px-1"> {{ item.created_at ? item.created_at : '-' }} </td>
+            <td class="py-2 truncate px-1"> {{ item.nama_keluarga ? item.nama_keluarga : '-'  }} </td>
+            <td class="truncate px-1 capitalize"> {{ item.alamat ? item.alamat+' Rt'+item.rt+'/'+item.rw+' Kel. '+item.kelurahan+' Kec. '+item.kecamatan : '-'  }} </td>
+            <td class="truncate px-1"> {{ item.jumlah_anggota_keluarga ? item.jumlah_anggota_keluarga+' Orang' : '-' }} </td>
+            <td class="truncate px-1"> {{ item.jenis_zakat == 'beras' ? item.jumlah_zakat+" Liter" : convertToCurrency(item.jumlah_zakat) }} </td>
             <td class="truncate px-1">
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
@@ -130,7 +133,7 @@
   <!-- Modal -->
   <div v-show="modalOpen" class="absolute inset-0 flex items-center justify-center">
     <div @click="modalOpen = false" class="absolute inset-0 bg-black/50" />
-    <div class="relative bg-white w-1/3 h-1/2 z-10 rounded-lg shadow-lg">
+    <div class="relative bg-white w-1/2 h-1/2 z-10 rounded-lg shadow-lg">
 
       <!-- close button -->
       <div class="absolute top-2 right-2">
@@ -144,20 +147,19 @@
 
       <!-- Modal Header -->
       <div class="text-center py-2 bg-gray-50 rounded-t-lg">
-        <h2 class="text-xl font-semibold">Edit Data</h2>
+        <h2 class="text-xl font-semibold capitalize">{{ modalHeader }} Data</h2>
       </div>
       <!-- End Modal Header -->
 
       <!-- Modal Content -->
       <div class="flex flex-col w-full px-10 py-2">
-        <label for="nama">Nama</label>
+        <label for="nama">Nama Keluarga</label>
         <input v-model="nama" type="text" id="nama" class="ring-2 ring-trueGray-300 focus:ring-blue-600 rounded-lg p-1.5 focus:outline-none outline-none duration-150">
         
-        <label for="jenis" class="pt-2">Jenis Zakat</label>
-        <select v-model="jenis" id="jenis" class="ring-2 ring-trueGray-300  rounded-lg p-1.5 focus:outline-none outline-none duration-150">
-          <option value="beras">beras</option>
-          <option value="uang">uang</option>
-        </select>
+        <div class="">
+          <label for="nama">Nama Keluarga</label>
+          <input v-model="nama" type="text" id="nama" class="ring-2 ring-trueGray-300 focus:ring-blue-600 rounded-lg p-1.5 focus:outline-none outline-none duration-150">
+        </div>
         
         <label for="jumlah" class="pt-2">Jumlah Zakat</label>
         <input v-model="jumlah" type="number" id="jumlah" class="ring-2 ring-trueGray-300 focus:ring-blue-600 rounded-lg p-1.5 focus:outline-none outline-none duration-150">
@@ -168,13 +170,12 @@
       <div class="flex justify-end px-10 pt-3">
         <button
           v-show="!flashMessage"
-          @click="updateData()"
-          :disabled="!nama || !jenis || !jumlah"
+          @click=" modalHeader == 'tambah' ? tambahData() : editData() "
+          
           :class="[nama && jenis && jumlah ? 'bg-blue-600 text-white' : 'text-gray-500' ]"
           class="p-1.5 px-5 font-semibold duration-150 rounded-lg"
         >Simpan</button>
       </div>
-      <p class="font-semibold text-center"> {{ flashMessage }} </p>
       <!-- End Button -->
 
     </div>
@@ -184,6 +185,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -195,11 +197,13 @@ export default {
 
       isLoading: false,
       modalOpen: false,
+      modalHeader: '',
 
       userAccess: {
         role: localStorage.getItem('role'),
-      } ,
+      },
 
+      axiosURL: 'http://127.0.0.1:8000/api/zakat/',
       axiosConfig: {
         headers: {
           'accept': 'application/json',
@@ -212,6 +216,54 @@ export default {
       keyword: '',
       delaySearch: true
     }
+  },
+
+  methods: {
+    getData(){
+      this.items = {}
+      // Is Loading
+      this.isLoading = true
+
+      axios.get(this.axiosURL+'mustahik', this.axiosConfig)
+      .then((res) => {
+        this.pagination = res.data.links
+        this.items = res.data.data
+        this.perPage = res.data.per_page
+        this.currentPage = res.data.current_page
+        
+        console.log(this.items);
+        return this.isLoading = false
+      })
+      .catch((err) => {
+        this.isLoading = false
+        console.log(err.response);
+        if (err.response.status == 401) {
+          // console.log('lala');
+          return this.$router.push('/login?error=kicked')
+        }
+      })
+    },
+
+    convertToCurrency(params){
+      return  new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'} )
+              .format(params)
+    },
+
+    populateModal(){
+
+    },
+
+    tambahData(){
+      alert('Ini tambah data')
+    },
+
+    editData(){
+      alert('Ini Edit data')
+    }
+  },
+
+  mounted() {
+    this.getData()
   },
 
 }
