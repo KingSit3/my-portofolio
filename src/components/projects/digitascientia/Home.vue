@@ -1,11 +1,10 @@
 <template>
-  {{ openModal }}
   <!-- Hero Section -->
   <section class="text-center pb-10">
     <h3 class="font-bold text-2xl text-gray-400">DIGITA SCIENTIA INDONESIA</h3>
     <h2 class="font-bold text-4xl mt-3">We Provide Creative <span class="text-[#2f55d4]">Solutions</span></h2>
     <p class="my-5">Is an Innovative national Company that lead digital transformation by providing digital products and services <br> (Information Management System, Internet of Things and Artificial Intelligence).</p>
-    <button @click="openModal = true" class="bg-[#2f55d4] p-2 px-5 mt-5 rounded-md text-white font-semibold duration-200 hover:-translate-y-1.5 hover:shadow-blue">Lihat Video</button>
+    <button @click="showModal = true" class="bg-[#2f55d4] p-2 px-5 mt-5 rounded-md text-white font-semibold duration-200 hover:-translate-y-1.5 hover:shadow-blue">Lihat Video</button>
     <div class="flex justify-center px-20">
       <img src="@/assets/images/projects/digitascientia/svgs/biologist-bro.svg" alt="Hero Image" class="max-w-[800px]">
     </div>
@@ -138,22 +137,30 @@
   </section>
   <!-- End Image Slider  -->
 
-  <!-- <div class="fixed inset-0 z-10 overflow-y-auto">
-    <Dialog :open="openModal">
-      <DialogOverlay @click="openModal = false"/>
+  <!-- <Dialog :open="showModal">
+    <div class="fixed inset-0 z-10 overflow-y-auto max-w-[90rem] mx-auto">
+      <div class="min-h-screen px-4 text-center">
+        <DialogOverlay @click="showSearchModal = false" class="fixed inset-0 bg-black/80" />
+        <div class="inline-block w-full">
+          <div class="w-full h-full bg-white px-20 pt-7 pb-5">
+            holas
+          </div>
+        </div>
 
-      <DialogDescription>
-        This will permanently deactivate your account
-      </DialogDescription>
+      </div>
+    </div>
+  </Dialog> -->
 
-      <p>
-        Are you sure you want to deactivate your account? All of your data will be
-        permanently removed. This action cannot be undone.
-      </p>
-
-      <button @click="openModal = false">Cancel</button>
-    </Dialog>
-  </div> -->
+  <div v-show="showModal == true">
+    <div class="z-50 fixed inset-0 w-full h-full flex justify-center items-center pt-5 bg-black/80">
+      <button @click="showModal = showModal = false" class="absolute top-28 right-1/4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 hover:opacity-60 duration-150 text-white" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+      <iframe src="https://www.youtube.com/embed/f6DZ_dwC5_0" title="Company Profile" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="rounded-lg bg-trueGray-800 p-3 shadow-xl mx-20 w-[530px] h-[285px] md:w-[630px] md:h-[385px]"></iframe>
+    </div>
+  </div>
 
 </template>
 
@@ -161,19 +168,16 @@
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
 
-import {
-    // Dialog,
-    // DialogOverlay,
-    // DialogDescription,
-  } from "@headlessui/vue";
+// import {
+//     Dialog,
+//     DialogOverlay,
+//     DialogDescription,
+//   } from "@headlessui/vue";
 
 export default {
   components: { 
     VueperSlides, 
     VueperSlide,
-    // Dialog,
-    // DialogOverlay,
-    // DialogDescription,
   },
 
   data() {
@@ -250,7 +254,7 @@ export default {
         },
       ],
 
-      openModal: false
+      showModal: false
     }
   },
 }

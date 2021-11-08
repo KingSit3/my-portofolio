@@ -1,5 +1,5 @@
 <template>
-  <header class="px-36 fixed w-full bg-white z-50">
+  <header class="px-36 fixed w-full bg-white z-10">
       <div class="max-w-[1200px] mx-auto flex justify-between py-4 items-center text-gray-500">
           <a href="#">
             <img src="@/assets/images/projects/digitascientia/logodigita.png" alt="Logo" class="h-12">
