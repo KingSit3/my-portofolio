@@ -1,11 +1,11 @@
 <template>
   <header class="px-7 md:px-20 lg:px-36 fixed w-full bg-white z-10 text-gray-500">
-    <div class="relative flex max-w-[1200px] mx-auto justify-between py-4 items-center">
+    <div class="relative flex max-w-[1200px] mx-auto justify-between items-center">
       <a href="#" class="z-20 bg-white">
         <img
           src="@/assets/images/projects/digitascientia/logodigita.png"
           alt="Logo"
-          class="h-12"
+          class="w-20"
         />
       </a>
 			<!-- Desktop Navbar -->

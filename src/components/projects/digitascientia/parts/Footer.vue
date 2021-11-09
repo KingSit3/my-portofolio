@@ -114,7 +114,7 @@
           <img
             src="@/assets/images/projects/digitascientia/logodigita.png"
             alt="Logo"
-            class="h-12 flex"
+            class="w-24 flex"
           />
           <p>Call us now at:</p>
           <a
