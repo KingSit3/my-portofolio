@@ -3,10 +3,11 @@ import Front from '../views/Front.vue'
 import Login from '../views/Login.vue'
 
 import zakatRoute from './zakatRoute.js'
-import clonesproject from './clone/index'
-import AdminPage from './adminpage/index'
-import landingPage from './landingpage/index'
+import clonesproject from './clone/index.js'
+import AdminPage from './adminpage/index.js'
+import landingPage from './landingpage/index.js'
 import DigitalScientiaRoute from './projects/digitascientia.js'
+import myponyasia from './myponyasia/index.js'
 
 const routes = [
   {
@@ -20,6 +21,7 @@ const routes = [
     component: Login
   },
 
+  ...myponyasia,
   ...zakatRoute,
   ...clonesproject,
   ...landingPage,

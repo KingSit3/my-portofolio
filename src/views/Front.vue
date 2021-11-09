@@ -6,14 +6,14 @@
       <div v-show="token" class="mb-10 text-center space-y-3">
         <span class="text-3xl font-bold capitalize">Anime@MyPonyAsia</span>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
-          <router-link to="pony.mpa" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Switcher</router-link>
-          <router-link to="/mpa/home" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Main Page </router-link>
+          <router-link to="/mpa/switcher" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Switcher</router-link>
+          <router-link to="/mpa/anime/home" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Main Page </router-link>
           <router-link to="/mpa/anime2" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Anime Page V2</router-link>
           <router-link to="/mpa/anime" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Anime Page </router-link>
-          <router-link to="/mpa/streaming" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Streaming Page </router-link>
-          <router-link to="/mpa/streaming2" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Streaming Page V2 </router-link>
-          <router-link to="/mpa/Find" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Find Page </router-link>
-        </div> 
+          <router-link to="/mpa/anime/streaming" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Streaming Page </router-link>
+          <router-link to="/mpa/anime/streaming2" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Streaming Page V2 </router-link>
+          <router-link to="/mpa/anime/Find" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Find Page </router-link>
+        </div>
       </div>
       <!-- End Anime MyPonyAsia -->
 
