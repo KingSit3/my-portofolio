@@ -206,11 +206,11 @@ export default {
 
       slides: [
         {
-          title: '',
+          title: 'Politeknik AKA Bogor',
           gambar: require('@/assets/images/projects/digitascientia/partner-aka.png')
         },
         {
-          title: 'Sky Pacific indonesia',
+          title: '',
           gambar: require('@/assets/images/projects/digitascientia/partner-sky.png')
         },
         {
