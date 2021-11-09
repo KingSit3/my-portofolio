@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 
 import zakatRoute from './zakatRoute.js'
 import clonesproject from './clone/index'
+import AdminPage from './adminpage/index'
 import landingPage from './landingpage/index'
 import DigitalScientiaRoute from './projects/digitascientia.js'
 
@@ -22,6 +23,7 @@ const routes = [
   ...zakatRoute,
   ...clonesproject,
   ...landingPage,
+  ...AdminPage,
   ...DigitalScientiaRoute,
 ]
 
