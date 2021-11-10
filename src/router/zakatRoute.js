@@ -23,7 +23,7 @@ const route = [
     meta: { requiresToken: true },
     children: [
       {
-        path: '/zakatadmin',
+        path: '',
         component: Dashboard,
         meta: { requiresToken: true }
       },
