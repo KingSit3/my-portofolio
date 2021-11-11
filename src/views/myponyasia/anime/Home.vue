@@ -52,7 +52,7 @@
         <vueper-slide v-for="(data, i) in corouselData" :key="i" 
                       :image="data.gambar">
           <template #content>
-            <div class="w-full justify-center items-center h-full w-full flex">
+            <div class="w-full justify-center items-center h-full flex">
               <div class="bg-blue-500 cursor-pointer">
               {{ data.content }}
               </div>
