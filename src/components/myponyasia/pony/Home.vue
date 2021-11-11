@@ -66,22 +66,13 @@
             <BorderDivider :title="'Subtitle Progress'" :link="'/myponyasia/anime2'" />
             
             <!-- Progress Bar -->
-            <div class="space-y-5 mt-10">
+            <div class="space-y-5 mt-10 px-5">
               <!-- Bar -->
-              <div class="font-semibold">
-                <h3 class="text-sm">Friendship Is Magic - Season 1</h3>
-                <h4 class="text-lg truncate">Episode 01 - Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, libero?</h4>
+              <div v-for="loop in 3" :key="loop" class="font-semibold">
+                <h3 class="text-xs md:text-sm">Friendship Is Magic - Season {{ loop }} </h3>
+                <h4 class="text-sm md:text-lg truncate">Episode 0{{ loop }} - Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, libero?</h4>
                 <div class="w-full bg-gray-100 rounded-lg">
                   <div class="rounded-lg p-1 bg-[#881798] w-[50%]" />
-                </div>
-              </div>
-              <!-- Bar -->
-              <!-- Bar -->
-              <div class="font-semibold">
-                <h3 class="text-sm">Friendship Is Magic - Season 1</h3>
-                <h4 class="text-lg truncate">Episode 01 - Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, libero?</h4>
-                <div class="w-full bg-gray-100 rounded-lg">
-                  <div class="rounded-lg p-1 bg-[#881798] w-[75%]" />
                 </div>
               </div>
               <!-- Bar -->
@@ -91,51 +82,63 @@
           </section>
           <!-- End Subtitle Progress -->
 
-          <!-- Latest Video -->
+          <!-- Latest Release 1 -->
           <section class="my-16 max-w-[90%] mx-auto">
 
             <BorderDivider :title="'Latest Release 1'" :link="'/myponyasia/anime2'" />
 
             <!-- Content 1 -->
-            <div class="grid grid-cols-3 gap-5 mt-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 px-5">
               <router-link v-for="loop in 4" :key="loop" to="/myponyasia/pony/stream" class="relative group overflow-hidden">
-                <img src="@\assets\images\myponyasia\landscape1.png" alt="Poster" class="rounded-xl object-cover max-h-[337px] group-hover:opacity-50 duration-150">
-                <div class="bg-[#881798] absolute right-0 top-0 flex space-x-4 p-3 px-4 rounded-bl-lg rounded-tr-lg">
-                  <div class="ring-2 ring-white px-3 p-0.5 rounded-lg uppercase font-semibold text-sm">ID</div>
-                  <div class="ring-2 ring-white px-3 p-0.5 rounded-lg uppercase font-semibold text-sm">EN</div>
+                <img src="@\assets\images\myponyasia\landscape1.png" alt="Poster" class="rounded-3xl object-cover max-h-[337px] group-hover:opacity-50 duration-150">
+                <div class="bg-[#881798] absolute right-0 top-0 flex space-x-4 p-3 px-4 rounded-bl-3xl rounded-tr-3xl">
+                  <div class="ring-2 ring-white px-3 p-0.5 rounded-3xl uppercase font-semibold text-sm">ID</div>
+                  <div class="ring-2 ring-white px-3 p-0.5 rounded-3xl uppercase font-semibold text-sm">EN</div>
                 </div>
-                <span class="absolute bottom-0 bg-[#881798] p-1 px-3 rounded-tr-lg rounded-bl-lg font-semibold truncate w-10/12">Episode 20 - Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto reiciendis veniam nesciunt, accusamus ipsum provident dolorem sint necessitatibus impedit praesentium. </span>
+                <span class="absolute bottom-0 bg-[#881798] p-1 px-3 rounded-tr-3xl rounded-bl-3xl font-semibold truncate w-10/12">Episode 20 - Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto reiciendis veniam nesciunt, accusamus ipsum provident dolorem sint necessitatibus impedit praesentium. </span>
               </router-link>  
             </div>
             <!-- End Content 1 -->
 
           </section>
-          <!-- End Latest Video -->
+          <!-- End Latest Release 1 -->
 
-          <!-- Latest Video 2 -->
+          <!-- Latest Release 2 -->
           <section class="my-16 max-w-[90%] mx-auto">
 
-            <div class="flex justify-between">
-              <div class="w-1/4">
+            <div class="flex flex-col lg:flex-row justify-between">
+              
+              <!-- Desktop Header -->
+              <div class="w-full lg:w-1/4 text-center hidden lg:contents">
                 <h2 class="text-3xl font-semibold"><a href="#">Latest Release 2</a></h2>
               </div>
-              <div class="w-3/4 divide-y">
+              <!-- End Desktop Header -->
 
-                <!-- Card -->
-                <div v-for="loop in 4" :key="loop"  class="flex justify-between py-5">
-                  <div>
-                    <a href="#" class="">Equestria Girls / Rainbow Rocks Shorts / Nov, 07 - en id</a>
-                    <h3 class="text-xl truncate w-3/4 font-bold"><a href="#">Episode 20 - Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h3>
-                  </div>
-                  <img src="@\assets\images\myponyasia\landscape1.png" alt="Poster" class="rounded-xl object-cover max-h-[150px]">
-                </div>
-                <!-- End Card -->
-
+              <!-- Mobile Header -->
+              <div class="lg:hidden contents">
+                <BorderDivider :title="'Latest Release 2'" :link="'/myponyasia/anime2'" />
               </div>
+              <!-- End Mobile Header -->
+                  
+
+              <!-- Card -->
+              <div class="w-full lg:w-3/4 divide-y divide-[#881798]">
+                <div v-for="loop in 3" :key="loop"  class="flex justify-between py-5 px-5 md:space-x-2">
+                  <div class="w-1/2 md:w-3/4">
+                    <h4 class="truncate text-xs md:text-sm lg:text-base"><a href="#">Equestria Girls / Rainbow Rocks Shorts / Nov, 07 - en id</a></h4>
+                    <h3 class="text-base md:text-lg lg:text-xl font-bold line-clamp-2"><a href="#">Episode 20 - Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h3>
+                  </div>
+                  <div class="w-1/2 md:w-1/2">
+                    <img src="@\assets\images\myponyasia\landscape1.png" alt="Poster" class="rounded-xl object-cover w-[200px] md:w-[250px]">
+                  </div>
+                </div>
+              </div>
+              <!-- End Card -->
+
             </div>
 
           </section>
-          <!-- End Latest Video 2-->
+          <!-- End Latest Release 2-->
 
           <!-- Latest Comics 1 -->
           <section class="my-16 max-w-[90%] mx-auto">
@@ -143,9 +146,9 @@
             <BorderDivider :title="'Latest Comics'" :link="'/myponyasia/anime2'" />
 
             <!-- Content -->
-            <div class="grid grid-cols-4 gap-5 mt-10 justify-items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
 
-              <router-link to="/myponyasia/pony/comics" class="relative group">
+              <router-link to="/myponyasia/pony/comics" class="relative group" v-for="loop in 4" :key="loop">
                 <img src="@\assets\images\myponyasia\poster-portrait.webp" alt="Comic Poster" class="max-w-[250px] max-h-[360px] w-[250px] h-[360px] rounded-lg object-cover group-hover:opacity-50 duration-150">
                 <span class="absolute bottom-0 p-1.5 bg-black/90 w-full text-center rounded-b-lg truncate">Other Comics</span>
                 <span class="absolute top-0 bg-black/90 p-1.5 px-3 rounded-tl-lg rounded-br-lg font-semibold max-w-[150px] truncate">Canterlot High: March Radness</span>
@@ -166,12 +169,12 @@
             <BorderDivider :title="'Latest Comics 2'" :link="'/myponyasia/anime2'" />
 
             <!-- Content -->
-            <div class="grid grid-cols-4 gap-5 mt-10 justify-items-center">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
 
-              <router-link v-for="loop in 4" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[400px]">
-                <img src="@\assets\images\myponyasia\comicCover.jpg" alt="Comic Poster" class="h-[400px] rounded-lg object-cover group-hover:opacity-50 duration-150">
-                <span class="bg-[#881798] absolute bottom-0 left-0 rounded-bl-lg rounded-tr-lg p-1 px-3 truncate font-bold">Issue #100</span>
-                <span class="bg-[#881798] absolute bottom-0 right-0 p-1 rounded-tl-lg rounded-br-lg px-5 font-bold">ID</span>
+              <router-link v-for="loop in 4" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[260px] md:h-[350px] lg:h-[400px]">
+                <img src="@\assets\images\myponyasia\comicCover.jpg" alt="Comic Poster" class="h-[260px] md:h-[350px] lg:h-[400px] rounded-3xl object-cover group-hover:opacity-50 duration-150">
+                <span class="w-7/12 bg-[#881798] absolute bottom-0 left-0 rounded-bl-3xl rounded-tr-3xl p-1 px-3 truncate text-xs md:text-base font-bold">Issue #100</span>
+                <span class="bg-[#881798] absolute bottom-0 right-0 rounded-tl-3xl rounded-br-3xl p-1 px-4 md:px-5 text-xs md:text-base font-bold">ID</span>
               </router-link>
 
             </div>
@@ -186,12 +189,11 @@
             <BorderDivider :title="'Latest Comics 3'" :link="'/myponyasia/anime2'" />
 
             <!-- Content -->
-            <div class="grid grid-cols-4 gap-5 mt-10 justify-items-center">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
 
-              <router-link v-for="loop in 4" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[400px]">
-                <img src="@\assets\images\myponyasia\comicCover.jpg" alt="Comic Poster" class="h-[400px] rounded-lg object-cover group-hover:opacity-50 duration-150">
-                <span class="bg-[#881798] absolute bottom-0 left-0 rounded-bl-lg rounded-tr-lg p-1 px-3 truncate font-bold">Issue #100</span>
-                <span class="bg-[#881798] absolute bottom-0 right-0 p-1 rounded-tl-lg rounded-br-lg px-5 font-bold">ID</span>
+              <router-link v-for="loop in 5" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[250px] md:h-[350px]">
+                <img src="@\assets\images\myponyasia\comicCover.jpg" alt="Comic Poster" class="h-[250px] md:h-[350px] rounded-lg object-cover group-hover:opacity-50 duration-150">
+                <span class="bg-[#881798] absolute bottom-0 w-full text-center rounded-b-lg py-0 md:py-3 px-3 font-bold line-clamp-2">Lorem ipsum dolor sit amet consectetur.</span>
               </router-link>
 
             </div>
@@ -252,16 +254,17 @@ export default {
         }
       ],
       CorouselBreakpoints: {
-        1024: {
-          slideRatio: 1 / 5
-        },
-        769: {
+        3840: {
           slideRatio: 1 / 3
         },
-        640: {
+        1024: {
+          arrows: false,
+          bullets: false
+        },
+        768: {
           slideRatio: 1 / 2,
           arrows: false,
-          bulletsOutside: true
+          bullets: false
         },
       },
     }
