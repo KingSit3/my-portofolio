@@ -1,14 +1,14 @@
 <template>
   <header class="bg-trueGray-900">
       <div class="flex justify-between items-center px-5 md:px-10 py-1.5 rounded-b shadow-xl max-w-[90rem] mx-auto">
-        <router-link to="/myponyasia/pony/home">
+        <router-link to="/mpa/pony">
           <img class="w-40" src="@/assets/images/myponyasia/logo-myponyasia.png" alt="" />
         </router-link>
 
         <!-- Loading State button -->
-        <!-- <div class="mr-0 md:mr-10 flex space-x-3">
+        <div class="mr-0 md:mr-10 flex space-x-3">
           <button @click="$emit('loading-state')" v-text="LoadingStateProps ? 'Normal State' : 'Loading State'" class="bg-trueGray-600 p-1 rounded-lg font-semibold px-3 hover:bg-blue-700 duration-200"></button>
-        </div> -->
+        </div>
         <!-- End Loading State button -->
 
         <!-- Desktop Nav -->
