@@ -20,7 +20,6 @@
 
       <!-- Grid item -->
       <div v-for="(item, index) in productsGridData" :key="index" class="border-2 border-gray-100 text-center py-10">
-        <img src="@/assets/images/projects/digitascientia/orbital.png" alt="Orbital Logo" class="w-1/4 mx-auto max-w-[200px]">
         <img :src="item.image" :alt="item.title + ' Image'" class="h-[250px] mx-auto">
         <h2 class="px-10 font-bold text-xl">{{ item.title }}</h2>
         <h3 class="px-5 mt-3 text-black/50">{{ item.caption }}</h3>
@@ -212,10 +211,6 @@ export default {
         {
           title: '',
           gambar: require('@/assets/images/projects/digitascientia/partner-sky.png')
-        },
-        {
-          title: '',
-          gambar: require('@/assets/images/projects/digitascientia/partner-tes.png')
         },
         {
           title: 'Institut Teknologi Padang',
