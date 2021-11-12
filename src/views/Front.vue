@@ -22,6 +22,7 @@
         <span class="text-3xl font-bold capitalize">Pony@MyPonyAsia</span>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
           <router-link to="/mpa/pony" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Main Page  </router-link>
+          <router-link to="/mpa/pony/season/2" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Season Page  </router-link>
         </div> 
       </div>
       <!-- End Pony MyPonyAsia -->
