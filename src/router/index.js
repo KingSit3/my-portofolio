@@ -33,15 +33,15 @@ const router = createRouter({
 })
 
 // Middleware in vue
-router.beforeEach((to) => {
-  // get meta data from route file
-  if (to.meta.requiresToken) {
-    // if 'token' not in localstorage
-    if (!localStorage.getItem('token')) {
-      // Redirect if not login
-      return '/login?error=dare'
-    }
-  } 
-})
+// router.beforeEach((to) => {
+//   // get meta data from route file
+//   // if (to.meta.requiresToken) {
+//   //   // if 'token' not in localstorage
+//   //   if (!localStorage.getItem('token')) {
+//   //     // Redirect if not login
+//   //     return '/login?error=dare'
+//   //   }
+//   // } 
+// })
 
 export default router
