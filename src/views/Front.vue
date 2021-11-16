@@ -23,6 +23,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
           <router-link to="/mpa/pony" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Main Page  </router-link>
           <router-link to="/mpa/pony/season/2" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Season Page  </router-link>
+          <router-link to="/mpa/pony/comics1" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center"> Comics 1 Page  </router-link>
         </div> 
       </div>
       <!-- End Pony MyPonyAsia -->

@@ -169,7 +169,7 @@
           <ComicCard1 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'" :link="'/mpa/pony/comics'" />
           <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics'" />
           <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics'" />
-        </div>
+        </div>  
         <!-- End Content -->
 
       </section>
