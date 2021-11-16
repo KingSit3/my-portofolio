@@ -165,13 +165,10 @@
 
         <!-- Content -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
-
-          <router-link v-for="loop in 4" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[260px] md:h-[350px] lg:h-[400px]">
-            <img src="@\assets\images\myponyasia\comicCover.jpg" alt="Comic Poster" class="h-[260px] md:h-[350px] lg:h-[400px] rounded-3xl object-cover group-hover:opacity-50 duration-150">
-            <span class="w-7/12 bg-[#881798] absolute bottom-0 left-0 rounded-bl-3xl rounded-tr-3xl p-1 px-3 truncate text-xs md:text-base font-bold">Issue #100</span>
-            <span class="bg-[#881798] absolute bottom-0 right-0 rounded-tl-3xl rounded-br-3xl p-1 px-4 md:px-5 text-xs md:text-base font-bold">ID</span>
-          </router-link>
-
+          <ComicCard1 :title="'issue #100'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
+          <ComicCard1 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'" :link="'/mpa/pony/comics'" />
+          <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics'" />
+          <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics'" />
         </div>
         <!-- End Content -->
 
@@ -187,7 +184,7 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
 
           <router-link v-for="loop in 5" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[250px] md:h-[350px]">
-            <img src="@\assets\images\myponyasia\comicCover.jpg" alt="Comic Poster" class="h-[250px] md:h-[350px] rounded-lg object-cover group-hover:opacity-50 duration-150">
+            <img src="@\assets\images\myponyasia\comicCover1.jpg" alt="Comic Poster" class="h-[250px] md:h-[350px] rounded-lg object-cover group-hover:opacity-50 duration-150">
             <span class="bg-[#881798] absolute bottom-0 w-full text-center rounded-b-lg py-0 md:py-3 px-3 font-bold line-clamp-2">Lorem ipsum dolor sit amet consectetur.</span>
           </router-link>
 
@@ -204,7 +201,9 @@
 <script>
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
+
 import BorderDivider from './parts/BorderDivider.vue'
+import ComicCard1 from './parts/ComicCard1.vue'
 import EpisodeCard1 from './parts/EpisodeCard1.vue'
 
 export default {
@@ -216,7 +215,8 @@ export default {
       VueperSlides,
       VueperSlide,
       BorderDivider,
-      EpisodeCard1
+      EpisodeCard1,
+      ComicCard1,
   },
 
   data() {

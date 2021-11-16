@@ -4,6 +4,7 @@ import MPASwitcher from '@/views/myponyasia/Switcher.vue'
 import Pony from '@/views/myponyasia/Pony.vue'
 import PonyHome from '@/components/myponyasia/pony/Home.vue'
 import PonySeason from '@/components/myponyasia/pony/Season.vue'
+import PonyComics from '@/components/myponyasia/pony/Comics.vue'
 
 // Anime Routes
 import AnimeHome from '@/views/myponyasia/anime/Home.vue'
@@ -38,7 +39,12 @@ const ponyroute = [
         path: 'season/:id',
         name: 'PonySeason',
         component: PonySeason,
-      }
+      },
+      {
+        path: 'comics',
+        name: 'PonyComics',
+        component: PonyComics,
+      },
     ]
   },
 ]
