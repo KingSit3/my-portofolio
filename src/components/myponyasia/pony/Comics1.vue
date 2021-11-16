@@ -164,7 +164,7 @@
       <!-- Latest & Latest Comics -->
 
     </div>
-    <!-- End Pop    ular & Latest Comics & Corousel -->
+    <!-- End Popular & Latest Comics & Corousel -->
 
     <!-- Latest Comics 2 -->
     <section class="my-16 max-w-[90%] mx-auto">
@@ -174,10 +174,10 @@
       <!-- Content -->
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
 
-        <router-link v-for="loop in 5" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[250px] md:h-[350px]">
-          <img src="@\assets\images\myponyasia\comicCover1.jpg" alt="Comic Poster" class="h-[250px] md:h-[350px] rounded-3xl object-cover group-hover:opacity-50 duration-150">
-          <span class="bg-[#881798] absolute bottom-0 w-full text-center rounded-b-3xl py-0 md:py-3 px-3 font-bold line-clamp-2">The Magic Of Cybertron</span>
-        </router-link>
+        <ComicCard2 :title="'issue #100'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
+        <ComicCard2 :title="'issue #1'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'EN'"  :link="'/mpa/pony/comics'" />
+        <ComicCard2 :title="'issue #5'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
+        <ComicCard2 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'"  :link="'/mpa/pony/comics'" />
 
       </div>
       <!-- End Content -->  
@@ -190,9 +190,12 @@
 
 <script>
 import BorderDivider from './parts/BorderDivider.vue'
+import ComicCard2 from './parts/ComicCard2.vue'
+
 export default {
   components: { 
-    BorderDivider 
+    BorderDivider,
+    ComicCard2,
   },
 
 }

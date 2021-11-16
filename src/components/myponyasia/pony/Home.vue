@@ -165,10 +165,10 @@
 
         <!-- Content -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
-          <ComicCard1 :title="'issue #100'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
-          <ComicCard1 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'" :link="'/mpa/pony/comics'" />
-          <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics'" />
-          <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics'" />
+          <ComicCard1 :title="'issue #100'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics1'" />
+          <ComicCard1 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'" :link="'/mpa/pony/comics1'" />
+          <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics1'" />
+          <ComicCard1 :title="'issue #98'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'fr'" :link="'/mpa/pony/comics1'" />
         </div>  
         <!-- End Content -->
 
@@ -183,10 +183,10 @@
         <!-- Content -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
 
-          <router-link v-for="loop in 5" :key="loop" to="/myponyasia/pony/comics" class="relative group h-[250px] md:h-[350px]">
-            <img src="@\assets\images\myponyasia\comicCover1.jpg" alt="Comic Poster" class="h-[250px] md:h-[350px] rounded-lg object-cover group-hover:opacity-50 duration-150">
-            <span class="bg-[#881798] absolute bottom-0 w-full text-center rounded-b-lg py-0 md:py-3 px-3 font-bold line-clamp-2">Lorem ipsum dolor sit amet consectetur.</span>
-          </router-link>
+          <ComicCard2 :title="'issue #100'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
+          <ComicCard2 :title="'issue #1'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'EN'"  :link="'/mpa/pony/comics'" />
+          <ComicCard2 :title="'issue #5'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
+          <ComicCard2 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'"  :link="'/mpa/pony/comics'" />
 
         </div>
         <!-- End Content -->
@@ -204,6 +204,7 @@ import 'vueperslides/dist/vueperslides.css'
 
 import BorderDivider from './parts/BorderDivider.vue'
 import ComicCard1 from './parts/ComicCard1.vue'
+import ComicCard2 from './parts/ComicCard2.vue'
 import EpisodeCard1 from './parts/EpisodeCard1.vue'
 
 export default {
@@ -217,6 +218,7 @@ export default {
       BorderDivider,
       EpisodeCard1,
       ComicCard1,
+      ComicCard2,
   },
 
   data() {
