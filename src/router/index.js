@@ -6,7 +6,6 @@ import zakatRoute from './zakatRoute.js'
 import clonesproject from './clone/index.js'
 import AdminPage from './adminpage/index.js'
 import landingPage from './landingpage/index.js'
-import DigitalScientiaRoute from './projects/digitascientia.js'
 import myponyasia from './myponyasia/index.js'
 
 const routes = [
@@ -26,7 +25,6 @@ const routes = [
   ...clonesproject,
   ...landingPage,
   ...AdminPage,
-  ...DigitalScientiaRoute,
 ]
 
 const router = createRouter({
