@@ -6,6 +6,7 @@ import PonyHome from '@/components/myponyasia/pony/Home.vue'
 import PonySeason from '@/components/myponyasia/pony/Season.vue'
 import PonyComics1 from '@/components/myponyasia/pony/Comics1.vue'
 import PonyComics2 from '@/components/myponyasia/pony/Comics2.vue'
+import PonyComicChapters1 from '@/components/myponyasia/pony/ComicChapters1.vue'
 
 // Anime Routes
 import AnimeHome from '@/views/myponyasia/anime/Home.vue'
@@ -50,6 +51,11 @@ const ponyroute = [
         path: 'comics2',
         name: 'PonyComics2',
         component: PonyComics2,
+      },
+      {
+        path: 'comics/:id',
+        name: 'PonyComicChapters1',
+        component: PonyComicChapters1,
       },
     ]
   },
