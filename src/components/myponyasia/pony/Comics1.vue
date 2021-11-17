@@ -2,7 +2,7 @@
   <div class="max-w-[85rem] mx-auto">
 
     <!-- Popular & Latest Comics & Corousel -->
-    <div class="flex justify-between flex-col lg:flex-row max-w-[90%] mx-auto pb-10">
+    <div class="flex justify-between flex-col lg:flex-row max-w-[90%] mx-auto py-4">
 
       <!-- Corousel -->
       <div class="w-full lg:w-[40%] pt-5 lg:pt-0 relative flex items-center justify-center space-x-4">
