@@ -174,10 +174,10 @@
       <!-- Content -->
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 justify-items-center">
 
-        <ComicCard2 :title="'issue #100'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
-        <ComicCard2 :title="'issue #1'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'EN'"  :link="'/mpa/pony/comics'" />
-        <ComicCard2 :title="'issue #5'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics'" />
-        <ComicCard2 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'"  :link="'/mpa/pony/comics'" />
+        <ComicCard2 :title="'issue #100'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics/1'" />
+        <ComicCard2 :title="'issue #1'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'EN'"  :link="'/mpa/pony/comics/2'" />
+        <ComicCard2 :title="'issue #5'" :cover="require('@/assets/images/myponyasia/comicCover2.jpg')" :lang="'id'"  :link="'/mpa/pony/comics/3'" />
+        <ComicCard2 :title="'issue #99'" :cover="require('@/assets/images/myponyasia/comicCover1.jpg')" :lang="'en'"  :link="'/mpa/pony/comics/4'" />
 
       </div>
       <!-- End Content -->  
