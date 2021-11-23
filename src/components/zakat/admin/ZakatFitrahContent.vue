@@ -316,7 +316,6 @@ export default {
         // console.log(res.data);
         this.pagination = res.data
         this.items = res.data.data
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
@@ -334,11 +333,8 @@ export default {
 
       .then((res) => {
         // console.log(res.data.data);
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
@@ -356,11 +352,8 @@ export default {
 
       .then((res) => {
         // console.log(res.data.data)
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
