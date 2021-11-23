@@ -25,7 +25,6 @@
         </svg>
       </div>
       <!-- End Search -->
-
     </div>
     <!-- End Tab & Search -->
 
@@ -59,7 +58,7 @@
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
                 <!-- Detail Button -->
-                <button @click="detailData(index)">
+                <button @click="populateModal(index, 'detail')">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-blue-500 duration-150" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -67,7 +66,7 @@
                 <!-- End Detail Button -->
 
                 <!-- Edit button -->
-                <button v-show="tab != 'deleted'" @click="populateModal(index)" title="Edit Button">
+                <button v-show="tab != 'deleted'" @click="populateModal(index, 'edit')" title="Edit Button">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-yellow-500 duration-150" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
@@ -139,7 +138,7 @@
   <div v-show="modalOpen" class="absolute inset-0 flex items-center justify-center">
     
     <!-- Overlay -->
-    <div @click="modalOpen = false" class="absolute inset-0 bg-black/50" />
+    <div @click="modalOpen = false; resetData()" class="absolute inset-0 bg-black/50" />
     <!-- End Overlay -->
 
     <!-- Modal Content -->
@@ -147,7 +146,7 @@
 
       <!-- close button -->
       <div class="absolute top-2 right-2">
-        <button @click="modalOpen = false">
+        <button @click="modalOpen = false; resetData()">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -167,35 +166,35 @@
         <div class="flex space-x-5">
           <div class="flex flex-col w-1/2 space-y-1">
             <label for="namaKeluarga">Nama Keluarga</label>
-            <input v-model="namaKeluarga" type="text" id="namaKeluarga" class="zakat-input-text">
+            <input v-model="namaKeluarga" :disabled="modalHeader == 'detail'" type="text" id="namaKeluarga" :class="[modalHeader == 'detail' ? 'bg-trueGray-300' : '' , 'zakat-input-text']">
           </div>
           <div class="flex flex-col w-1/2 space-y-1">
             <label for="jumlahAnggotaKeluarga">Jumlah Anggota Keluarga</label>
-            <input v-model="jumlahAnggotaKeluarga" type="number" id="jumlahAnggotaKeluarga" class="w-3/4 zakat-input-text">
+            <input v-model="jumlahAnggotaKeluarga" :disabled="modalHeader == 'detail'" type="number" id="jumlahAnggotaKeluarga" :class="[modalHeader == 'detail' ? 'bg-trueGray-300' : '' , 'zakat-input-text w-3/4']">
           </div>
         </div>
         <div class="flex space-x-5">
           <div class="flex flex-col w-1/2 space-y-1">
             <label for="alamat">Alamat</label>
-            <textarea v-model="alamat" id="alamat" class="zakat-input-text"></textarea>
+            <textarea v-model="alamat" id="alamat" :disabled="modalHeader == 'detail'" :class="[modalHeader == 'detail' ? 'bg-trueGray-300' : '' , 'zakat-input-text']" />
           </div>
           <div class="flex flex-col space-y-1">
             <label for="rt">RT/RW</label>
             <div class="flex space-x-3">
-              <input v-model="rt" type="text" id="rt" class="w-14 zakat-input-text" placeholder="001">
+              <input v-model="rt" type="text" id="rt" :disabled="modalHeader == 'detail'" :class="[modalHeader == 'detail' ? 'bg-trueGray-300' : '' , 'w-14 zakat-input-text']" placeholder="001">
               <span class="text-xl">/</span>
-              <input v-model="rw" type="text" id="rw" class="w-14 zakat-input-text" placeholder="010">
+              <input v-model="rw" type="text" id="rw" :disabled="modalHeader == 'detail'" :class="[modalHeader == 'detail' ? 'bg-trueGray-300' : '' , 'w-14 zakat-input-text']" placeholder="010">
             </div>
           </div>
         </div>
         <div class="flex space-x-5">
           <div class="flex flex-col w-1/2 space-y-1">
             <label for="Kelurahan">Kelurahan</label>
-            <input v-model="kelurahan" type="text" id="Kelurahan" class="zakat-input-text">
+            <input v-model="kelurahan" type="text" id="Kelurahan" :disabled="modalHeader == 'detail'" :class="[modalHeader == 'detail' ? 'bg-trueGray-300' : '' , 'zakat-input-text']">
           </div>
           <div class="flex flex-col w-1/2 space-y-1">
             <label for="Kecamatan">Kecamatan</label>
-            <input v-model="kecamatan" type="text" id="Kecamatan" class="zakat-input-text">
+            <input v-model="kecamatan" type="text" id="Kecamatan" :disabled="modalHeader == 'detail'" :class="[modalHeader == 'detail' ? 'bg-trueGray-300' : '' , 'zakat-input-text']">
           </div>
         </div>
         <!-- End Forms -->
@@ -208,10 +207,10 @@
         <button
           v-show="modalHeader != 'detail'"
           :disabled="!formValidation"
-          @click=" modalHeader == 'tambah' ? tambahData() : editData() "
+          @click=" modalHeader == 'tambah' ? tambahData() : updateData() "
           :class="[formValidation ? 'bg-blue-600 text-white' : 'text-gray-500' ]"
           class="p-1.5 px-5 font-semibold duration-150 rounded-lg"
-        >Simpan</button>
+        >{{ modalHeader == 'tambah' ? 'Simpan' : 'Update' }}</button>
       </div>
       <!-- End Button -->
 
@@ -239,10 +238,13 @@ export default {
       rw: '',
       kelurahan: '',
       kecamatan: '',
+      id: '',
 
       isLoading: false,
       modalOpen: false,
       modalHeader: '',
+
+      keyword: '',
 
       userAccess: {
         role: localStorage.getItem('role'),
@@ -258,18 +260,17 @@ export default {
         withCredentials: true
       },
 
-      keyword: '',
-      delaySearch: true
     }
   },
 
   methods: {
-    getData(params){
+    getData(){
       this.items = {}
       // Is Loading
       this.isLoading = true
+      const getUrl = (this.tab == 'data') ? this.axiosURL+'mustahik' : this.axiosURL+'mustahik/deleted'
 
-      axios.get(this.axiosURL+'mustahik/'+params, this.axiosConfig)
+      axios.get(getUrl, this.axiosConfig)
       .then((res) => {
         this.pagination = res.data
         this.items = res.data.data
@@ -306,17 +307,62 @@ export default {
       })
     },
 
+    searchData(){
+      // Is Loading
+      this.isLoading = true
+
+      axios.get(this.axiosURL+'mustahik/'+this.keyword, this.axiosConfig)
+
+      .then((res) => {
+        // console.log(res.data.data);
+        this.pagination = res.data
+        this.items = res.data.data
+        // console.log(this.pagination);
+        return this.isLoading = false
+      })
+
+      .catch((err) => {
+        this.isLoading = false
+        console.log(err.response);
+      })
+    },
+
+    searchDeletedData(){
+      this.isLoading = true
+
+      axios.get(this.axiosURL+'mustahik/deleted/'+this.keyword, this.axiosConfig)
+
+      .then((res) => {
+        // console.log(res.data.data);
+        this.pagination = res.data
+        this.items = res.data.data
+        return this.isLoading = false
+      })
+
+      .catch((err) => {
+        this.isLoading = false
+        console.log(err.response);
+      })
+    },
+
     convertToCurrency(params){
       return  new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'} )
               .format(params)
     },
 
-    populateModal(){
+    populateModal(index, header){
+      this.modalOpen = true
+      this.modalHeader = header
+      
+      this.namaKeluarga = this.items[index].nama_keluarga
+      this.jumlahAnggotaKeluarga = this.items[index].jumlah_anggota_keluarga
+      this.alamat = this.items[index].alamat
+      this.rt = this.items[index].rt
+      this.rw = this.items[index].rw
+      this.kelurahan = this.items[index].kelurahan
+      this.kecamatan = this.items[index].kecamatan
+      this.id = this.items[index].id
 
-    },
-
-    detailData(index){
-      alert("Ini Detail data"+index)
     },
 
     tambahData(){
@@ -343,8 +389,52 @@ export default {
       })
     },
 
-    editData(){
-      alert('Ini Edit data')
+    updateData(){
+      axios.patch(this.axiosURL+'mustahik/'+this.id, {
+        namaKeluarga: this.namaKeluarga,
+        jumlahAnggotaKeluarga: this.jumlahAnggotaKeluarga,
+        alamat: this.alamat,
+        rt: this.rt,
+        rw: this.rw,
+        kelurahan: this.kelurahan,
+        kecamatan: this.kecamatan,
+      }, this.axiosConfig)
+
+      .then(res => {
+        console.log(res)
+        this.getData()
+        this.modalOpen = false
+        this.resetData()
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
+
+    deleteData(id){
+      axios.delete(this.axiosURL+'mustahik/'+id, this.axiosConfig)
+
+      .then(res => {
+        console.log(res)
+        this.getData()
+      })
+
+      .catch(err => {
+        console.log(err);
+      })
+    },
+
+    restoreData(id){
+      axios.get(this.axiosURL+'mustahik/restore/'+id, this.axiosConfig)
+      
+      .then(res => {
+        console.log(res);
+        this.getData()
+      })
+
+      .catch(err => {
+        console.log(err);
+      })
     },
 
     resetData(){
@@ -355,6 +445,7 @@ export default {
       this.rw = ''
       this.kelurahan = ''
       this.kecamatan = ''
+      this.id = ''
     },
 
   },
@@ -385,17 +476,31 @@ export default {
       } 
 
       return true
-    }
+    },
+
   },
 
   mounted() {
-    this.getData('data')
+    this.getData()
   },
 
   watch: {
     tab(){
-      this.getData(this.tab)
-    }
+      this.getData()
+    },
+
+    keyword(){
+      let delaySearch = true
+
+      if (delaySearch) {
+        setTimeout(() => {
+          this.tab == 'deleted' ? this.searchDeletedData() : this.searchData()
+          delaySearch = true
+        }, 1000);
+      }
+      
+      delaySearch = false
+    },
   }
 
 }
