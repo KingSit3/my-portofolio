@@ -181,12 +181,24 @@
   </div>
   <!-- End Modal -->
 
+  <Toast 
+    @trigger-toast-done="triggerToast = false; toastText = ''; triggerToast = null"
+    :text="toastText" 
+    :showProps="triggerToast" 
+    :timeoutProps="toastTimeout"
+  />
+
 </template>
 
 <script>
 import axios from 'axios'
+import Toast from './parts/Toast.vue'
 
 export default {
+  components: {
+    Toast
+  },
+  
   data() {
     return {
       tab: 'beras',
@@ -210,6 +222,10 @@ export default {
         nama: '',
         role: '',
       },
+
+      triggerToast: false,
+      toastText: '',
+      toastTimeout: 2000,
 
       nama: '',
       jenis: '',
@@ -251,14 +267,10 @@ export default {
       }, this.axiosConfig)
         
       .then(() => {
-        this.getDataZakat(this.tab)
-
-        setTimeout(() => {
+          this.getDataZakat(this.tab)
           this.modalOpen = false
           this.resetData()
-        }, 1000);
-
-        return this.flashMessage = 'Data berhasil diupdate'
+          this.toast('Data berhasil Diubah', 3000)
       })
 
       .catch((err) => {
@@ -272,7 +284,7 @@ export default {
       .then(() => {
         this.getDataZakat(this.tab)
 
-        return this.flashMessage = 'Data berhasil dihapus'
+        this.toast('Data berhasil Dihapus', 3000)
       })
 
       .catch((err) => {
@@ -368,12 +380,19 @@ export default {
 
       .then(() => {
         // console.log(res);
+        this.toast('Data berhasil Dikembalikkan', 3000)
         this.getDataZakat(this.tab)
       })
 
       .catch((err) => {
         console.log(err);
       })
+    },
+
+    toast(text, timeout = null){
+      this.toastText = text
+      this.timeout = timeout
+      this.triggerToast = true
     }
   },
 

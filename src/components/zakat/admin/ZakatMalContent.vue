@@ -336,12 +336,24 @@
 
   </div>
   <!-- End Content -->
+  <Toast 
+    @trigger-toast-done="triggerToast = false; toastText = ''; triggerToast = null"
+    :text="toastText" 
+    :showProps="triggerToast" 
+    :timeoutProps="toastTimeout"
+  />
+
 </template>
 
 <script>
 import axios from 'axios'
+import Toast from './parts/Toast.vue'
 
 export default {
+  components: {
+    Toast
+  },
+
   data() {
     return {
       tab: 'penghasilan',
@@ -362,6 +374,10 @@ export default {
         timeout: 5000,
         withCredentials: true
       },
+
+      triggerToast: false,
+      toastText: '',
+      toastTimeout: 2000,
 
       nama: '',
       jenis: '',
@@ -435,6 +451,7 @@ export default {
         
       .then(() => {
         // get Updated data
+        this.toast('Data Berhasil Dihapus', 2000)
         return this.getDataZakat(this.tab)
       })
 
@@ -500,11 +517,18 @@ export default {
       .then(() => {
         // console.log(res);
         this.getDataZakat(this.tab)
+        this.toast('Data Berhasil Dikembalikkan', 2000)
       })
 
       .catch((err) => {
         console.log(err);
       })
+    },
+
+    toast(text, timeout = null){
+      this.toastText = text
+      this.timeout = timeout
+      this.triggerToast = true
     }
 
   },

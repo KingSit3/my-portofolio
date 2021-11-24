@@ -2,7 +2,6 @@
   
   <!-- Content -->
   <div>
-
     <!-- Tambah Button -->
     <button @click="modalOpen = true; modalHeader = 'tambah'" class="bg-blue-500 p-1.5 px-5 my-2 text-white rounded-lg font-semibold focus:outline-none">Tambah Mustahik</button>
     <!-- End Tambah Button -->
@@ -219,12 +218,22 @@
 
   </div>
   <!-- End Modal -->
+  <Toast 
+    @trigger-toast-done="triggerToast = false; toastText = ''; triggerToast = null"
+    :text="toastText" 
+    :showProps="triggerToast" 
+    :timeoutProps="toastTimeout"
+  />
 
 </template>
 
 <script>
 import axios from 'axios'
+import Toast from './parts/Toast.vue'
 export default {
+  components: { 
+    Toast,
+  },
   data() {
     return {
       tab: 'data',
@@ -245,6 +254,10 @@ export default {
       modalHeader: '',
 
       keyword: '',
+
+      triggerToast: false,
+      toastText: '',
+      toastTimeout: 3000,
 
       userAccess: {
         role: localStorage.getItem('role'),
@@ -274,12 +287,12 @@ export default {
       .then((res) => {
         this.pagination = res.data
         this.items = res.data.data
-        
         // console.log(this.items);
         return this.isLoading = false
       })
       .catch((err) => {
         this.isLoading = false
+        this.toastText = 'Ups, ada kesalahan'
         console.log(err.response);
         if (err.response.status == 401) {
           return this.$router.push('/login?error=kicked')
@@ -378,7 +391,9 @@ export default {
       )
       .then((res) => {
         console.log(res);
+        this.toast('Data Berhasil Ditambahkan', 3000)
         this.resetData()
+        this.modalOpen = false
         this.getData(this.tab)
       })
       .catch((err) => {
@@ -404,6 +419,7 @@ export default {
         console.log(res)
         this.getData()
         this.modalOpen = false
+        this.toast('Data berhasil Diubah', 2000)
         this.resetData()
       })
       .catch(err => {
@@ -416,6 +432,7 @@ export default {
 
       .then(res => {
         console.log(res)
+        this.toast('Data berhasil Dihapus', 6000)
         this.getData()
       })
 
@@ -429,6 +446,7 @@ export default {
       
       .then(res => {
         console.log(res);
+        this.toast('Data berhasil Dikembalikkan', 6000)
         this.getData()
       })
 
@@ -447,6 +465,12 @@ export default {
       this.kecamatan = ''
       this.id = ''
     },
+
+    toast(text, timeout = null){
+      this.toastText = text
+      this.timeout = timeout
+      this.triggerToast = true
+    }
 
   },
 
