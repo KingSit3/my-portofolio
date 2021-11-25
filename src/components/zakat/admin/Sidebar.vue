@@ -17,20 +17,23 @@
     <!-- Sidebar menu Active -->
 
     <!-- Zakat Fitrah menu -->
-    <router-link to="/zakatadmin/fitrah" :class="[ this.$route.fullPath == '/zakatadmin/fitrah' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+    <router-link to="/zakatadmin/fitrah" :class="[ this.$route.name == 'fitrah' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Zakat Fitrah</h1>
     </router-link>
-    <router-link to="/zakatadmin/mal" :class="[ this.$route.fullPath == '/zakatadmin/mal' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+    <router-link to="/zakatadmin/mal" :class="[ this.$route.name == 'mal' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Zakat Mal</h1>
     </router-link>
-    <router-link to="/zakatadmin/infaq" :class="[ this.$route.fullPath == '/zakatadmin/infaq' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+    <router-link to="/zakatadmin/infaq" :class="[ this.$route.name == 'infaq' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Infaq</h1>
     </router-link>
-    <!-- <router-link to="/zakatadmin/mustahik" :class="[ this.$route.fullPath == '/zakatadmin/mustahik' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+    <router-link to="/zakatadmin/mustahik" :class="[ this.$route.name == 'mustahik' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Daftar Mustahik</h1>
-    </router-link> -->
+    </router-link>
+    <router-link to="/zakatadmin/transaksi" :class="[ this.$route.name == 'transaksi' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+      <h1 class="text-lg font-bold">Transaksi</h1>
+    </router-link>
     <div v-show="role == 'admin' ">
-      <router-link to="/zakatadmin/admins" :class="[ this.$route.fullPath == '/zakatadmin/admins' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+      <router-link to="/zakatadmin/admins" :class="[ this.$route.name == 'admins' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
         <h1 class="text-lg font-bold">Admin</h1>
       </router-link>
     </div>

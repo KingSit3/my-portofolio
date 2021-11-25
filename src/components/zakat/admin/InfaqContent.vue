@@ -47,7 +47,7 @@
         <!-- If Data -->
         <tbody v-if="items.length > 0 && !isLoading">
           <tr v-for="(item, index) in items" :key="index" class="text-sm mb-16 text-center cursor-default even:bg-gray-100 duration-150">
-            <td class="py-2 truncate px-1"> {{ (index + 1)  + (perPage * (currentPage - 1)) }} </td>
+            <td class="py-2 truncate px-1"> {{ (index + 1)  + (pagination.per_page * (pagination.current_page - 1)) }} </td>
             <td class="py-2 truncate px-1"> {{ item.nama ? item.nama : '-'  }} </td>
             <td class="truncate px-1"> {{ convertToCurrency(item.jumlah) }} </td>
             <td class="truncate px-1"> {{ item.created_at ? item.created_at : '-' }} </td>
@@ -106,8 +106,8 @@
       <!-- End Table -->
 
       <!-- Pagination -->
-      <ul v-if="this.items.length >= this.perPage" class="flex justify-end space-x-3 mt-5">
-        <li v-for="(item, index) in pagination" :key="index">
+      <ul v-if="pagination.next_page_url || pagination.prev_page_url" class="flex justify-end space-x-3 mt-5">
+        <li v-for="(item, index) in pagination.links" :key="index">
           <button 
             v-show="item.url" 
             @click="getPagination(item.url)"
@@ -172,23 +172,37 @@
   </div>
   <!-- End Modal -->
 
+  <Toast 
+    @trigger-toast-done="triggerToast = false; toastText = ''; triggerToast = null"
+    :text="toastText" 
+    :showProps="triggerToast" 
+    :timeoutProps="toastTimeout"
+  />
+
 </template>
 
 <script>
 import axios from 'axios'
+import Toast from './parts/Toast.vue'
 
 export default {
+  components: {
+    Toast
+  },
+
   data() {
     return {
       tab: 'data',
       items: {},
       pagination: {},
-      perPage: '',
-      currentPage: '',
 
       isLoading: false,
       modalOpen: false,
       flashMessage: '',
+
+      triggerToast: false,
+      toastText: '',
+      toastTimeout: 3000,
 
       userRole: localStorage.getItem('role'),
 
@@ -235,10 +249,8 @@ export default {
       
       .then((res) => {
         // console.log(res.data);
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
         // console.log(this.pagination);
         return this.isLoading = false
       })
@@ -257,7 +269,7 @@ export default {
         
       .then(() => {
         this.getDataInfaq()
-        return this.flashMessage = 'Data berhasil dihapus'
+        this.toast("Data Berhasil Dihapus", 2000)
       })
 
       .catch((err) => {
@@ -283,6 +295,7 @@ export default {
 
         setTimeout(() => {
           this.modalOpen = false
+          this.toast("Data Berhasil Diubah", 2000)
           this.resetData()
         }, 1000);
 
@@ -302,10 +315,8 @@ export default {
       
       .then((res) => {
         // console.log(res.data);
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
         // console.log(res);
         return this.isLoading = false
       })
@@ -324,11 +335,8 @@ export default {
 
       .then((res) => {
         // console.log(res.data.data);
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
@@ -346,11 +354,8 @@ export default {
 
       .then((res) => {
         // console.log(res.data.data)
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
@@ -365,12 +370,19 @@ export default {
 
       .then(() => {
         // console.log(res);
+        this.toast("Data Berhasil Dikembalikkan", 2000)
         this.getDataInfaq()
       })
 
       .catch((err) => {
         console.log(err);
       })
+    },
+
+    toast(text, timeout = null){
+      this.toastText = text
+      this.timeout = timeout
+      this.triggerToast = true
     }
 
   },

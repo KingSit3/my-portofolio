@@ -49,7 +49,7 @@
         <!-- If Data -->
         <tbody v-if="items.length > 0 && !isLoading">
           <tr v-for="(item, index) in items" :key="index" class="text-sm mb-16 text-center cursor-default even:bg-gray-100 duration-150">
-            <td class="py-2 truncate px-1"> {{ (index + 1)  + (perPage * (currentPage - 1)) }} </td>
+            <td class="py-2 truncate px-1"> {{ (index + 1)  + (pagination.per_page * (pagination.current_page - 1)) }} </td>
             <td class="py-2 truncate px-1"> {{ item.nama ? item.nama : '-'  }} </td>
             <td class="truncate px-1"> {{ item.jenis ? item.jenis : '-'  }} </td>
             <td class="truncate px-1"> {{ item.jenis == 'uang' ? convertToCurrency(item.jumlah) : item.jumlah }} </td>
@@ -109,8 +109,8 @@
       <!-- End Table -->
 
       <!-- Pagination -->
-      <ul v-if="this.items.length >= this.perPage" class="flex justify-end space-x-3 mt-5">
-        <li v-for="(item, index) in pagination" :key="index">
+      <ul v-if="pagination.next_page_url || pagination.prev_page_url" class="flex justify-end space-x-3 mt-5">
+        <li v-for="(item, index) in pagination.links" :key="index">
           <button 
             v-show="item.url" 
             @click="getPagination(item.url)"
@@ -181,19 +181,29 @@
   </div>
   <!-- End Modal -->
 
+  <Toast 
+    @trigger-toast-done="triggerToast = false; toastText = ''; triggerToast = null"
+    :text="toastText" 
+    :showProps="triggerToast" 
+    :timeoutProps="toastTimeout"
+  />
+
 </template>
 
 <script>
 import axios from 'axios'
+import Toast from './parts/Toast.vue'
 
 export default {
+  components: {
+    Toast
+  },
+  
   data() {
     return {
       tab: 'beras',
       items: {},
       pagination: {},
-      perPage: '',
-      currentPage: '',
 
       isLoading: false,
       modalOpen: false,
@@ -212,6 +222,10 @@ export default {
         nama: '',
         role: '',
       },
+
+      triggerToast: false,
+      toastText: '',
+      toastTimeout: 2000,
 
       nama: '',
       jenis: '',
@@ -253,14 +267,10 @@ export default {
       }, this.axiosConfig)
         
       .then(() => {
-        this.getDataZakat(this.tab)
-
-        setTimeout(() => {
+          this.getDataZakat(this.tab)
           this.modalOpen = false
           this.resetData()
-        }, 1000);
-
-        return this.flashMessage = 'Data berhasil diupdate'
+          this.toast('Data berhasil Diubah', 3000)
       })
 
       .catch((err) => {
@@ -274,7 +284,7 @@ export default {
       .then(() => {
         this.getDataZakat(this.tab)
 
-        return this.flashMessage = 'Data berhasil dihapus'
+        this.toast('Data berhasil Dihapus', 3000)
       })
 
       .catch((err) => {
@@ -291,10 +301,8 @@ export default {
       
       .then((res) => {
         // console.log(res);
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
         // console.log(this.pagination);
         return this.isLoading = false
       })
@@ -318,11 +326,8 @@ export default {
       
       .then((res) => {
         // console.log(res.data);
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
@@ -340,11 +345,8 @@ export default {
 
       .then((res) => {
         // console.log(res.data.data);
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
@@ -362,11 +364,8 @@ export default {
 
       .then((res) => {
         // console.log(res.data.data)
-        this.pagination = res.data.links
+        this.pagination = res.data
         this.items = res.data.data
-        this.perPage = res.data.per_page
-        this.currentPage = res.data.current_page
-        // console.log(this.pagination);
         return this.isLoading = false
       })
 
@@ -381,12 +380,19 @@ export default {
 
       .then(() => {
         // console.log(res);
+        this.toast('Data berhasil Dikembalikkan', 3000)
         this.getDataZakat(this.tab)
       })
 
       .catch((err) => {
         console.log(err);
       })
+    },
+
+    toast(text, timeout = null){
+      this.toastText = text
+      this.timeout = timeout
+      this.triggerToast = true
     }
   },
 
