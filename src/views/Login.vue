@@ -51,6 +51,8 @@
         </div>
         <!-- Login Button -->
 
+        {{ currToken }}
+
       </div>
     </div>
     <!-- End Right Content -->
@@ -70,6 +72,7 @@
 
 <script>
 import axios from 'axios'
+import zakatAxios from '@/axios.js'
 
 axios.defaults.withCredentials = true
 axios.defaults.headers = {'accept': 'application/json'}
@@ -93,7 +96,7 @@ export default {
   methods: {
     login(){
       
-      axios.post('http://127.0.0.1:8000/api/login', {
+      axios.post((process.env.VUE_APP_BASEURL)+'login', {
         email: this.email,
         password: this.password,
       })
@@ -103,6 +106,9 @@ export default {
         localStorage.setItem('nama', res.data.name)
         localStorage.setItem('role', res.data.role)
         localStorage.setItem('token', res.data.token)
+
+        zakatAxios.zakatAxios.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('token')
+
         return this.$router.push('/zakatadmin')
       })
 
