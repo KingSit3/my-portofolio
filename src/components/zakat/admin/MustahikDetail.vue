@@ -27,10 +27,9 @@
             <td class="px-2">:</td>
             <td>
               <span v-show="totalZakatBeras"> {{ totalZakatBeras + ' Liter beras' }} </span>
-              <span> {{ totalZakatBeras && totalZakatUang ? ' & ' : '-' }} </span>
+              <span v-show="totalZakatBeras"> {{ totalZakatBeras && totalZakatUang ? ' & ' : ' - ' }} </span>
               <span v-show="totalZakatUang">{{ totalZakatUang }}</span>
-              
-              </td>
+            </td>
           </tr>
         </table>
       </div>
