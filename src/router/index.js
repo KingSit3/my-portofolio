@@ -7,6 +7,7 @@ import clonesproject from './clone/index.js'
 import AdminPage from './adminpage/index.js'
 import landingPage from './landingpage/index.js'
 import myponyasia from './myponyasia/index.js'
+import restoranAdmin from './restoranRoute'
 
 const routes = [
   {
@@ -20,6 +21,7 @@ const routes = [
     component: Login
   },
 
+  ...restoranAdmin,
   ...myponyasia,
   ...zakatRoute,
   ...clonesproject,
