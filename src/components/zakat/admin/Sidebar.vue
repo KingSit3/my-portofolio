@@ -1,6 +1,6 @@
 <template>
   <!-- logo -->
-  <div class="h-[15%] text-white/90">
+  <div class="h-[10%] text-white/90">
     <a href="#" class="flex justify-center items-center space-x-2 pt-5">
       <h1 class="text-xl font-extrabold">Zakat Admin</h1>
     </a>
@@ -8,7 +8,7 @@
   <!-- End logo -->
 
   <!-- Sidebar -->
-  <div class="h-[80%] my-5 space-y-5 px-5 max-h-[450px] overflow-y-auto text-center">
+  <div class="h-[90%] my-5 space-y-5 px-5 max-h-[490px] overflow-y-auto text-center">
 
     <!-- Sidebar menu Active -->
     <router-link to="/zakatadmin" :class="[ this.$route.fullPath == '/zakatadmin' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
@@ -29,8 +29,11 @@
     <router-link to="/zakatadmin/mustahik" :class="[ this.$route.name == 'mustahik' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Daftar Mustahik</h1>
     </router-link>
-    <router-link to="/zakatadmin/transaksi" :class="[ this.$route.name == 'transaksi' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
-      <h1 class="text-lg font-bold">Transaksi</h1>
+    <router-link to="/zakatadmin/transaksi/zakat" :class="[ this.$route.name == 'transaksi' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+      <h1 class="text-lg font-bold">Transaksi Zakat</h1>
+    </router-link>
+    <router-link to="/zakatadmin/transaksi/infaq" :class="[ this.$route.name == 'transaksi' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+      <h1 class="text-lg font-bold">Transaksi Infaq</h1>
     </router-link>
     <div v-show="role == 'admin' ">
       <router-link to="/zakatadmin/admins" :class="[ this.$route.name == 'admins' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">

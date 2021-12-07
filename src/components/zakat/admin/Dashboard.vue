@@ -87,7 +87,7 @@
 <script>
 import VueApexCharts from "vue3-apexcharts"
 import ApexCharts from "apexcharts";
-import axios from 'axios'
+import axios from '@/axios.js'
 
 export default {
   components:{
@@ -153,16 +153,6 @@ export default {
           }
         },
       },
-
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
-
     }
   },
   methods: {
@@ -172,9 +162,7 @@ export default {
     },
 
     getData(){
-      const baseURL = 'http://127.0.0.1:8000/'
-
-      axios.get(baseURL+'api/zakat/dashboard', this.axiosConfig)
+      axios.zakatAxios.get('dashboard')
 
       .then(res => {
         // console.log(res.data);

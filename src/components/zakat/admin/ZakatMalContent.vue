@@ -346,7 +346,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 import Toast from './parts/Toast.vue'
 
 export default {
@@ -366,14 +366,6 @@ export default {
       modalDetail: {},
 
       userRole: localStorage.getItem('role'),
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
 
       triggerToast: false,
       toastText: '',
@@ -407,7 +399,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/'+params, this.axiosConfig)
+      axios.zakatAxios.get('mal/'+params)
       
       .then((res) => {
         // console.log(res.data);
@@ -430,7 +422,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get(url, this.axiosConfig)
+      axios.zakatAxios.get(url)
       
       .then((res) => {
         // console.log(res.data);
@@ -447,7 +439,7 @@ export default {
     },
 
     deleteZakat(id){
-      axios.delete('http://127.0.0.1:8000/api/zakat/mal/' + id, this.axiosConfig)
+      axios.zakatAxios.delete('mal/' + id)
         
       .then(() => {
         // get Updated data
@@ -476,7 +468,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/' +params+ '/' +this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('mal/' +params+ '/' +this.keyword)
 
       .then((res) => {
         // console.log(res.data.data);
@@ -497,7 +489,7 @@ export default {
       
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/deleted/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('mal/deleted/'+this.keyword)
 
       .then((res) => {
         this.pagination = res.data
@@ -512,7 +504,7 @@ export default {
     },
 
     restoreData(id){
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/restore/'+id, this.axiosConfig)
+      axios.zakatAxios.get('mal/restore/'+id)
 
       .then(() => {
         // console.log(res);

@@ -228,7 +228,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 import Toast from './parts/Toast.vue'
 export default {
   components: { 
@@ -263,27 +263,18 @@ export default {
         role: localStorage.getItem('role'),
       },
 
-      axiosURL: 'http://127.0.0.1:8000/api/zakat/',
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
-
     }
   },
 
   methods: {
     getData(){
       this.items = {}
+
       // Is Loading
       this.isLoading = true
-      const getUrl = (this.tab == 'data') ? this.axiosURL+'mustahik' : this.axiosURL+'mustahik/deleted'
+      const getUrl = (this.tab == 'data') ? 'mustahik' : 'mustahik/deleted'
 
-      axios.get(getUrl, this.axiosConfig)
+      axios.zakatAxios.get(getUrl)
       .then((res) => {
         this.pagination = res.data
         this.items = res.data.data
@@ -304,10 +295,10 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get(url, this.axiosConfig)
+      axios.zakatAxios.get(url)
       
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.pagination = res.data
         this.items = res.data.data
         // console.log(this.pagination);
@@ -324,7 +315,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get(this.axiosURL+'mustahik/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('mustahik/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data);
@@ -343,7 +334,7 @@ export default {
     searchDeletedData(){
       this.isLoading = true
 
-      axios.get(this.axiosURL+'mustahik/deleted/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('mustahik/deleted/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data);
@@ -356,11 +347,6 @@ export default {
         this.isLoading = false
         console.log(err.response);
       })
-    },
-
-    convertToCurrency(params){
-      return  new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'} )
-              .format(params)
     },
 
     populateModal(index, header){
@@ -379,15 +365,15 @@ export default {
     },
 
     tambahData(){
-      axios.post(this.axiosURL+'mustahik', {
+      axios.zakatAxios.post('mustahik', {
           namaKeluarga: this.namaKeluarga,
           jumlahAnggotaKeluarga: this.jumlahAnggotaKeluarga,
           alamat: this.alamat,
-          rt: this.rt,
-          rw: this.rw,
+          rt: this.formattingNumberRtRw(this.rt),
+          rw: this.formattingNumberRtRw(this.rw),
           kelurahan: this.kelurahan,
           kecamatan: this.kecamatan,
-        }, this.axiosConfig
+        }
       )
       .then((res) => {
         console.log(res);
@@ -405,15 +391,15 @@ export default {
     },
 
     updateData(){
-      axios.patch(this.axiosURL+'mustahik/'+this.id, {
+      axios.zakatAxios.patch('mustahik/'+this.id, {
         namaKeluarga: this.namaKeluarga,
         jumlahAnggotaKeluarga: this.jumlahAnggotaKeluarga,
         alamat: this.alamat,
-        rt: this.rt,
-        rw: this.rw,
+        rt: this.formattingNumberRtRw(this.rt),
+        rw: this.formattingNumberRtRw(this.rw),
         kelurahan: this.kelurahan,
         kecamatan: this.kecamatan,
-      }, this.axiosConfig)
+      })
 
       .then(res => {
         console.log(res)
@@ -428,7 +414,7 @@ export default {
     },
 
     deleteData(id){
-      axios.delete(this.axiosURL+'mustahik/'+id, this.axiosConfig)
+      axios.zakatAxios.delete('mustahik/'+id)
 
       .then(res => {
         console.log(res)
@@ -442,7 +428,7 @@ export default {
     },
 
     restoreData(id){
-      axios.get(this.axiosURL+'mustahik/restore/'+id, this.axiosConfig)
+      axios.zakatAxios.get('mustahik/restore/'+id)
       
       .then(res => {
         console.log(res);
@@ -464,6 +450,19 @@ export default {
       this.kelurahan = ''
       this.kecamatan = ''
       this.id = ''
+    },
+
+    convertToCurrency(params){
+      return  new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'} )
+              .format(params)
+    },
+
+    formattingNumberRtRw(number){
+      return new Intl.NumberFormat('id-ID', {
+        minimumIntegerDigits: 3,
+        maximumFractionDigits: 0
+      })
+      .format(number)
     },
 
     toast(text, timeout = null){

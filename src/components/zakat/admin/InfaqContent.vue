@@ -50,7 +50,7 @@
             <td class="py-2 truncate px-1"> {{ (index + 1)  + (pagination.per_page * (pagination.current_page - 1)) }} </td>
             <td class="py-2 truncate px-1"> {{ item.nama ? item.nama : '-'  }} </td>
             <td class="truncate px-1"> {{ convertToCurrency(item.jumlah) }} </td>
-            <td class="truncate px-1"> {{ item.created_at ? item.created_at : '-' }} </td>
+            <td class="truncate px-1"> {{ item.created_at ? timeFormatter(item.created_at) : '-' }} </td>
             <td class="truncate px-1">
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
@@ -182,7 +182,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 import Toast from './parts/Toast.vue'
 
 export default {
@@ -205,15 +205,6 @@ export default {
       toastTimeout: 3000,
 
       userRole: localStorage.getItem('role'),
-
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
 
       nama: '',
       jumlah: '',
@@ -243,9 +234,9 @@ export default {
       // Is Loading
       this.isLoading = true
       
-      const isDeleted = this.tab == 'data' ? 'http://127.0.0.1:8000/api/zakat/infaq' : 'http://127.0.0.1:8000/api/zakat/infaq/deleted'
+      const url = this.tab == 'data' ? 'infaq' : 'infaq/deleted'
 
-      axios.get(isDeleted, this.axiosConfig)
+      axios.zakatAxios.get(url)
       
       .then((res) => {
         // console.log(res.data);
@@ -265,7 +256,7 @@ export default {
     },
 
     deleteData(id){
-      axios.delete('http://127.0.0.1:8000/api/zakat/infaq/' + id, this.axiosConfig)
+      axios.zakatAxios.delete('infaq/' + id)
         
       .then(() => {
         this.getDataInfaq()
@@ -285,10 +276,10 @@ export default {
     },
 
     updateData(){
-      axios.put('http://127.0.0.1:8000/api/zakat/infaq/' + this.id, {
+      axios.zakatAxios.put('infaq/' + this.id, {
         nama: this.nama,
         jumlah: this.jumlah,
-      }, this.axiosConfig)
+      })
         
       .then(() => {
         this.getDataInfaq()
@@ -311,7 +302,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get(url, this.axiosConfig)
+      axios.zakatAxios.get(url)
       
       .then((res) => {
         // console.log(res.data);
@@ -331,7 +322,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/infaq/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('infaq/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data);
@@ -350,7 +341,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/infaq/deleted/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('infaq/deleted/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data)
@@ -366,7 +357,7 @@ export default {
     },
 
     restoreData(id){
-      axios.get('http://127.0.0.1:8000/api/zakat/infaq/restore/'+id, this.axiosConfig)
+      axios.zakatAxios.get('infaq/restore/'+id)
 
       .then(() => {
         // console.log(res);
@@ -377,6 +368,11 @@ export default {
       .catch((err) => {
         console.log(err);
       })
+    },
+
+    timeFormatter(param){
+      return new Date(param)
+            .toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
     },
 
     toast(text, timeout = null){

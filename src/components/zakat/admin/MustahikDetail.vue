@@ -61,6 +61,7 @@
             <th class="p-1.5 w-[10%] bg-gray-200 rounded-tl-lg">No</th>
             <th class="w-[30%] bg-gray-200">Jenis Zakat</th>
             <th class="w-[30%] bg-gray-200">Jumlah</th>
+            <th class="w-[30%] bg-gray-200">Tanggal</th>
             <th class="w-[30%] bg-gray-200 rounded-tr-lg">Aksi</th>
           </tr>
         </thead>
@@ -73,6 +74,7 @@
             <td class="py-2 truncate px-1"> {{ (index + 1)  + (pagination.per_page * (pagination.current_page - 1)) }} </td>
             <td class="py-2 truncate px-1"> {{ item.jenis_zakat }} </td>
             <td class="truncate px-1"> {{ item.jenis_zakat == 'beras' ? item.jumlah+' Liter' : convertToCurrency(item.jumlah) }} </td>
+            <td class="truncate px-1"> {{ item.created_at ? timeFormatter(item.created_at) : '-' }} </td>
             <td class="truncate px-1">
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
@@ -198,7 +200,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 import Toast from './parts/Toast.vue'
 
 export default {
@@ -225,16 +227,6 @@ export default {
       toastText: '',
       toastTimeout: null,
 
-      axiosURL: 'http://127.0.0.1:8000/api/zakat/',
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
-      
     }
   },
 
@@ -246,10 +238,10 @@ export default {
 
     getData(id){
       this.isLoading = true
-      axios.get(this.axiosURL+'mustahik/detail/'+id, this.axiosConfig)
+      axios.zakatAxios.get('mustahik/detail/'+id)
       
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.items = res.data.transaksi.data
         this.pagination = res.data.transaksi
         this.mustahik = res.data.mustahik
@@ -267,10 +259,10 @@ export default {
     },
 
     deleteData(id){
-      axios.delete(this.axiosURL+'transaksi/'+id, this.axiosConfig)
+      axios.zakatAxios.delete('transaksizakat/'+id)
 
-      .then(res => {
-        console.log(res);
+      .then(() => {
+        // console.log(res);
         this.toast('Data berhasil Dihapus', 3000)
         this.getData(this.$route.params.id)
       })
@@ -283,14 +275,14 @@ export default {
 
     tambahData(){
 
-      axios.post(this.axiosURL+'transaksi', {
+      axios.zakatAxios.post('transaksizakat', {
         mustahik_id: this.$route.params.id,
         jenis_zakat: this.jenis,
         jumlah: this.jumlah,
-      }, this.axiosConfig)
+      })
 
-      .then(res => {
-        console.log(res);
+      .then(() => {
+        // console.log(res);
         this.toast("Data berhasil Ditambahkan", 3000)
         this.getData(this.$route.params.id)
         this.modalOpen = false
@@ -312,14 +304,14 @@ export default {
     },
 
     updateData(){
-      axios.patch(this.axiosURL+'transaksi/'+this.transaksiId, {
+      axios.zakatAxios.patch('transaksizakat/'+this.transaksiId, {
         mustahik_id: this.$route.params.id,
         jenis_zakat: this.jenis,
         jumlah: this.jumlah,
-      }, this.axiosConfig)
+      })
 
-      .then( res => {
-        console.log(res);
+      .then( () => {
+        // console.log(res);
         this.getData(this.$route.params.id)
         this.modalOpen = false
         this.resetData()
@@ -335,6 +327,11 @@ export default {
       this.toastText = text
       this.toastTimeout = timeout
       this.triggerToast = true
+    },
+
+    timeFormatter(param){
+      return new Date(param)
+            .toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
     },
 
     resetData(){
@@ -370,6 +367,11 @@ export default {
 
   mounted() {
     this.getData(this.$route.params.id)
+  },
+
+  unmounted() {
+    this.totalZakatBeras()
+    this.totalZakatUang()
   },
 }
 </script>

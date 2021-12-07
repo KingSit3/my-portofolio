@@ -53,7 +53,7 @@
             <td class="py-2 truncate px-1"> {{ item.nama ? item.nama : '-'  }} </td>
             <td class="truncate px-1"> {{ item.jenis ? item.jenis : '-'  }} </td>
             <td class="truncate px-1"> {{ item.jenis == 'uang' ? convertToCurrency(item.jumlah) : item.jumlah }} </td>
-            <td class="truncate px-1"> {{ item.created_at ? item.created_at : '-' }} </td>
+            <td class="truncate px-1"> {{ item.created_at ? timeFormatter(item.created_at) : '-' }} </td>
             <td class="truncate px-1">
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
@@ -191,7 +191,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 import Toast from './parts/Toast.vue'
 
 export default {
@@ -208,15 +208,6 @@ export default {
       isLoading: false,
       modalOpen: false,
       flashMessage: '',
-
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
 
       userAccess: {
         nama: '',
@@ -260,11 +251,11 @@ export default {
     },
 
     updateData(){
-      axios.put('http://127.0.0.1:8000/api/zakat/fitrah/' + this.id, {
+      axios.zakatAxios.put('fitrah/' + this.id, {
         nama: this.nama,
         jenis: this.jenis,
         jumlah: this.jumlah,
-      }, this.axiosConfig)
+      })
         
       .then(() => {
           this.getDataZakat(this.tab)
@@ -279,7 +270,7 @@ export default {
     },
 
     deleteData(id){
-      axios.delete('http://127.0.0.1:8000/api/zakat/fitrah/' + id ,this.axiosConfig)
+      axios.zakatAxios.delete('fitrah/' + id)
         
       .then(() => {
         this.getDataZakat(this.tab)
@@ -297,7 +288,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/'+params, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/'+params)
       
       .then((res) => {
         // console.log(res);
@@ -322,7 +313,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get(url, this.axiosConfig)
+      axios.zakatAxios.get(url)
       
       .then((res) => {
         // console.log(res.data);
@@ -341,7 +332,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/'+params+'/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/'+params+'/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data);
@@ -360,7 +351,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/deleted/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/deleted/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data)
@@ -376,7 +367,7 @@ export default {
     },
 
     restoreData(id){
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/restore/'+id, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/restore/'+id)
 
       .then(() => {
         // console.log(res);
@@ -387,6 +378,11 @@ export default {
       .catch((err) => {
         console.log(err);
       })
+    },
+
+    timeFormatter(param){
+      return new Date(param)
+            .toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
     },
 
     toast(text, timeout = null){
