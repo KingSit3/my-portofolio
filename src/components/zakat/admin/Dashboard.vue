@@ -118,10 +118,16 @@ export default {
 
       infaqChart: {
         year: null,
-        series: [{
-          name: 'Total',
-          data: [],
-        }],
+        series: [
+          {
+            name: 'Total Pemasukan',
+            data: [],
+          },
+          {
+            name: 'Total Pengeluaran',
+            data: [],
+          }
+        ],
         chartOptions: {
           chart: {
             id: 'infaqChart',
@@ -139,7 +145,6 @@ export default {
           },
           dataLabels: {
             enabled: false,
-            
           },
           yaxis: {
             labels: {
@@ -149,7 +154,7 @@ export default {
             }
           },
           xaxis: {
-            categories: []
+            categories: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember',]
           }
         },
       },
@@ -166,29 +171,43 @@ export default {
 
       .then(res => {
         // console.log(res.data);
-        this.infaqChart.year = res.data.infaq.year
 
+        // Assign data to Zakat Fitrah
         this.fitrahChart.year = res.data.fitrah.year
         this.fitrahChart.series = [res.data.fitrah.totalData[0].muzakkiBeras, res.data.fitrah.totalData[0].muzakkiUang]
         this.fitrahChart.totalBeras = res.data.fitrah.totalData[0].totalBeras
         this.fitrahChart.totalUang = res.data.fitrah.totalData[0].totalUang
 
-        // Update infaqChart ChartSeries using Apexchart method
-        ApexCharts.exec('infaqChart', 'updateSeries', [{
-          data: res.data.infaq.totalInfaq.map(($value) => {
-            return $value.total
-          })
-        }])
-        
+
+        // Assign Data To Infaq
+        this.infaqChart.year = res.data.infaq.year
+
         // Update infaqChart Chartoption using Apexchart method 
-          ApexCharts.exec('infaqChart', 'updateOptions', {
-            xaxis: {
-              categories: res.data.infaq.totalInfaq.map(($value) => {
-                return $value.month
-              })
-            }
-          })
-        })
+        ApexCharts.exec('infaqChart', 'updateSeries', [
+          {
+            data: res.data.infaq.totalInfaq.map(($value) => {
+              return $value[0].total
+            })
+          },
+          {
+            data: res.data.infaq.pengeluaran.map(($value) => {
+              return $value[0].total
+            })
+          }
+        ]
+        )
+
+        // Update infaqChart Chartoption using Apexchart method 
+        // Pick  either totalInfaq or pengeluaran
+        // const pickInfaqMonths = res.data.infaq.pengeluaran.length < res.data.infaq.totalInfaq.length ? res.data.infaq.totalInfaq : res.data.infaq.pengeluaran
+        // ApexCharts.exec('infaqChart', 'updateOptions', {
+        //   xaxis: {
+        //     categories: pickInfaqMonths.map(($value) => {
+        //       return $value.month
+        //     })
+        //   }
+        // })
+      })
 
       .catch(err => {
         console.log(err);

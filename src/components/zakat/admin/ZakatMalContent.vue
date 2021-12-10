@@ -57,7 +57,7 @@
             <td class="py-2 truncate px-1"> {{ item.nama }} </td>
             <td class="truncate px-1"> {{ item.jenis }} </td>
             <td class="truncate px-1"> {{ item.jenis != 'sapi' && item.jenis != 'kambing' ? convertToCurrency(item.total) : item.total }} </td>
-            <td class="truncate px-1"> {{ item.created_at }} </td>
+            <td class="truncate px-1"> {{ item.created_at ? timeFormatter(item.created_at) : '-' }} </td>
             <td class="truncate px-1">
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
@@ -385,6 +385,11 @@ export default {
     convertToCurrency(params){
       return  new Intl.NumberFormat('id-ID', {style:'currency', currency:'IDR'} )
               .format(params)
+    },
+
+    timeFormatter(param){
+      return new Date(param)
+            .toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
     },
 
     resetData(){

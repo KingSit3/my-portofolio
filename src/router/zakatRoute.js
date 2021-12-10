@@ -6,6 +6,7 @@ import ZakatAdmin from '../views/zakat/ZakatAdmin.vue'
   import MustahikDetail from '../components/zakat/admin/MustahikDetail.vue'
   import Dashboard from '../components/zakat/admin/Dashboard.vue'
   import TransaksiZakat from '../components/zakat/admin/TransaksiZakat.vue'
+  import TransaksiInfaq from '../components/zakat/admin/TransaksiInfaq.vue'
   import Admins from '../components/zakat/admin/Admins.vue'
 
 import zakatCalculate from '../views/zakat/ZakatCalculate.vue'
@@ -64,6 +65,12 @@ const route = [
         path: 'transaksi/zakat',
         name: 'transaksiZakat',
         component: TransaksiZakat,
+        meta: { requiresToken: true }
+      },
+      {
+        path: 'transaksi/infaq',
+        name: 'transaksiInfaq',
+        component: TransaksiInfaq,
         meta: { requiresToken: true }
       },
       {

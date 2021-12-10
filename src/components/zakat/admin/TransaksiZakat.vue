@@ -7,7 +7,7 @@
     <div class="flex justify-between">
 
       <!-- Tambah Button -->
-      <button @click="modalOpen = true; modalHeader = 'tambah'" class="bg-blue-500 p-1.5 px-5 my-2 text-white rounded-lg font-semibold focus:outline-none">Tambah Transaksi</button>
+      <button @click="modalOpen = true; modalHeader = 'tambah'" class="bg-blue-500 p-1.5 px-5 my-2 text-white rounded-lg font-semibold focus:outline-none">Tambah Transaksi Zakat</button>
       <!-- End Tambah Button -->
 
       <!-- Search -->
@@ -414,6 +414,7 @@ export default {
         this.getData()
         this.modalOpen = false
         this.resetData()
+        this.toast('Data berhasil Diubah')
       })
 
       .catch(err => {

@@ -51,8 +51,6 @@
         </div>
         <!-- Login Button -->
 
-        {{ currToken }}
-
       </div>
     </div>
     <!-- End Right Content -->
@@ -96,7 +94,7 @@ export default {
   methods: {
     login(){
       
-      axios.post((process.env.VUE_APP_BASEURL)+'login', {
+      axios.post((process.env.VUE_APP_BASEURL_ENDPOINT)+'api/login', {
         email: this.email,
         password: this.password,
       })
@@ -132,6 +130,7 @@ export default {
     }
 
   },
+
   mounted() {
     if (this.$route.query.error == 'kicked') {
       this.toast('Anda harus login lagi')

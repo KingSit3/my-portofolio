@@ -29,10 +29,10 @@
     <router-link to="/zakatadmin/mustahik" :class="[ this.$route.name == 'mustahik' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Daftar Mustahik</h1>
     </router-link>
-    <router-link to="/zakatadmin/transaksi/zakat" :class="[ this.$route.name == 'transaksi' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+    <router-link to="/zakatadmin/transaksi/zakat" :class="[ this.$route.name == 'transaksiZakat' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Transaksi Zakat</h1>
     </router-link>
-    <router-link to="/zakatadmin/transaksi/infaq" :class="[ this.$route.name == 'transaksi' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
+    <router-link to="/zakatadmin/transaksi/infaq" :class="[ this.$route.name == 'transaksiInfaq' ? 'text-blue-500/90 bg-white' : 'text-white/50 hover:text-white/100 duration-150']" class="flex p-1.5 px-5 rounded-full items-center space-x-2 duration-200">
       <h1 class="text-lg font-bold">Transaksi Infaq</h1>
     </router-link>
     <div v-show="role == 'admin' ">
