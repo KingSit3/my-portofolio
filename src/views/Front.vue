@@ -66,6 +66,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
             <router-link to="/calculate" class="shadow-red py-10 w-3/4 bg-purple-700 rounded-lg text-center">Calculate</router-link>
             <router-link to="/zakatadmin" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Admin</router-link>
+            <router-link to="/zakatsearch" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Zakat Search</router-link>
         </div> 
       </div>
       <!-- End Zakat Project -->

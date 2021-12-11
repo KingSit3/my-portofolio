@@ -10,6 +10,7 @@ import ZakatAdmin from '../views/zakat/ZakatAdmin.vue'
   import Admins from '../components/zakat/admin/Admins.vue'
 
 import zakatCalculate from '../views/zakat/ZakatCalculate.vue'
+import ZakatSearch from '../views/zakat/ZakatSearch.vue'
 
 const route = [
   // Zakat Page Links
@@ -17,6 +18,12 @@ const route = [
     path: '/calculate',
     name: 'zakatCalculate',
     component: zakatCalculate,
+    meta: { requiresToken: true }
+  },
+  {
+    path: '/zakatsearch',
+    name: 'zakatSearch',
+    component: ZakatSearch,
     meta: { requiresToken: true }
   },
   {
