@@ -5,10 +5,12 @@ import ZakatAdmin from '../views/zakat/ZakatAdmin.vue'
   import Mustahik from '../components/zakat/admin/MustahikContent.vue'
   import MustahikDetail from '../components/zakat/admin/MustahikDetail.vue'
   import Dashboard from '../components/zakat/admin/Dashboard.vue'
-  import Transaksi from '../components/zakat/admin/Transaksi.vue'
+  import TransaksiZakat from '../components/zakat/admin/TransaksiZakat.vue'
+  import TransaksiInfaq from '../components/zakat/admin/TransaksiInfaq.vue'
   import Admins from '../components/zakat/admin/Admins.vue'
 
 import zakatCalculate from '../views/zakat/ZakatCalculate.vue'
+import ZakatSearch from '../views/zakat/ZakatSearch.vue'
 
 const route = [
   // Zakat Page Links
@@ -16,6 +18,12 @@ const route = [
     path: '/calculate',
     name: 'zakatCalculate',
     component: zakatCalculate,
+    meta: { requiresToken: true }
+  },
+  {
+    path: '/zakatsearch',
+    name: 'zakatSearch',
+    component: ZakatSearch,
     meta: { requiresToken: true }
   },
   {
@@ -61,9 +69,15 @@ const route = [
         meta: { requiresToken: true }
       },
       {
-        path: 'transaksi',
-        name: 'transaksi',
-        component: Transaksi,
+        path: 'transaksi/zakat',
+        name: 'transaksiZakat',
+        component: TransaksiZakat,
+        meta: { requiresToken: true }
+      },
+      {
+        path: 'transaksi/infaq',
+        name: 'transaksiInfaq',
+        component: TransaksiInfaq,
         meta: { requiresToken: true }
       },
       {

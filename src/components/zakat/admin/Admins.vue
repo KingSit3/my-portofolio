@@ -163,7 +163,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 export default {
   data() {
     return {
@@ -185,22 +185,13 @@ export default {
       modalOpen: false,
       errors: {},
 
-      axiosUrl: 'http://127.0.0.1:8000/api/zakat/',
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
     }
   },
 
   methods: {
     getData(){
       this.isLoading = true
-      axios.get(this.axiosUrl+'admins', this.axiosConfig)
+      axios.zakatAxios.get('admins', this.axiosConfig)
 
       .then( res => {
         // console.log(res);
@@ -220,24 +211,19 @@ export default {
       
       this.isLoading = true
 
-      axios.post(this.axiosUrl+'admins', {
+      axios.zakatAxios.post('admins', {
         name: this.nama,
         email: this.email,
         role: this.role,
         password: this.password,
-      } ,this.axiosConfig)
+      } )
 
       .then( () => {
         // console.log(res);
         this.modalOpen = false
         this.toast('Admin berhasil ditambahkan')
-        this.name = ''
-        this.email = ''
-        this.role = ''
-        this.password = ''
-        this.errors = {}
-        this.isLoading = false
         this.getData()
+        this.resetData()
       })
 
       .catch( err => {
@@ -251,7 +237,7 @@ export default {
     },
 
     deleteData(adminId){
-      axios.delete(this.axiosUrl+'admins/'+adminId, this.axiosConfig)
+      axios.zakatAxios.delete('admins/'+adminId, this.axiosConfig)
       .then((res) => {
         this.modalOpen = false
         this.toast(res.data)
@@ -277,24 +263,19 @@ export default {
     },
 
     updateData(){
-      axios.put(this.axiosUrl+'admins/'+this.userId, {
+      axios.zakatAxios.put('admins/'+this.userId, {
         name: this.nama,
         email: this.email,
         role: this.role,
         password: this.password,
-      } ,this.axiosConfig)
+      } )
 
       .then( () => {
         // console.log(res);
         this.modalOpen = false
         this.toast('Data Admin Berhasil Diubah')
-        this.name = ''
-        this.email = ''
-        this.role = ''
-        this.password = ''
-        this.userId = ''
-        this.errors = {}
         this.getData()
+        this.resetData()
       })
 
       .catch( err => {
@@ -308,7 +289,17 @@ export default {
     },
 
     toDateFormater(param){
-      return new Date(param).toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
+      return new Date(param)
+            .toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
+    },
+
+    resetData(){
+      this.name = ''
+      this.email = ''
+      this.role = ''
+      this.password = ''
+      this.errors = {}
+      this.isLoading = false
     },
 
     toast(text){

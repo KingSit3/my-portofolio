@@ -57,7 +57,7 @@
             <td class="py-2 truncate px-1"> {{ item.nama }} </td>
             <td class="truncate px-1"> {{ item.jenis }} </td>
             <td class="truncate px-1"> {{ item.jenis != 'sapi' && item.jenis != 'kambing' ? convertToCurrency(item.total) : item.total }} </td>
-            <td class="truncate px-1"> {{ item.created_at }} </td>
+            <td class="truncate px-1"> {{ item.created_at ? timeFormatter(item.created_at) : '-' }} </td>
             <td class="truncate px-1">
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
@@ -346,7 +346,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 import Toast from './parts/Toast.vue'
 
 export default {
@@ -366,14 +366,6 @@ export default {
       modalDetail: {},
 
       userRole: localStorage.getItem('role'),
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
 
       triggerToast: false,
       toastText: '',
@@ -395,6 +387,11 @@ export default {
               .format(params)
     },
 
+    timeFormatter(param){
+      return new Date(param)
+            .toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
+    },
+
     resetData(){
       this.nama = ''
       this.jenis = ''
@@ -407,7 +404,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/'+params, this.axiosConfig)
+      axios.zakatAxios.get('mal/'+params)
       
       .then((res) => {
         // console.log(res.data);
@@ -430,7 +427,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get(url, this.axiosConfig)
+      axios.zakatAxios.get(url)
       
       .then((res) => {
         // console.log(res.data);
@@ -447,7 +444,7 @@ export default {
     },
 
     deleteZakat(id){
-      axios.delete('http://127.0.0.1:8000/api/zakat/mal/' + id, this.axiosConfig)
+      axios.zakatAxios.delete('mal/' + id)
         
       .then(() => {
         // get Updated data
@@ -476,7 +473,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/' +params+ '/' +this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('mal/' +params+ '/' +this.keyword)
 
       .then((res) => {
         // console.log(res.data.data);
@@ -497,7 +494,7 @@ export default {
       
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/deleted/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('mal/deleted/'+this.keyword)
 
       .then((res) => {
         this.pagination = res.data
@@ -512,7 +509,7 @@ export default {
     },
 
     restoreData(id){
-      axios.get('http://127.0.0.1:8000/api/zakat/mal/restore/'+id, this.axiosConfig)
+      axios.zakatAxios.get('mal/restore/'+id)
 
       .then(() => {
         // console.log(res);

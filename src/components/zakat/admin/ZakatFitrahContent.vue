@@ -36,11 +36,12 @@
         <thead>
           <tr class="rounded-lg">
             <th class="p-1.5 w-[5%] bg-gray-200 rounded-tl-lg">No</th>
-            <th class="w-[35%] bg-gray-200">Nama</th>
+            <th class="w-[25%] bg-gray-200">Nama</th>
+            <th class="w-[15%] bg-gray-200">No Telp</th>
             <th class="w-[10%] bg-gray-200">Jenis Zakat</th>
             <th class="w-[15%] bg-gray-200">Jumlah</th>
             <th class="w-[15%] bg-gray-200">Tanggal Zakat</th>
-            <th class="w-[20%] bg-gray-200 rounded-tr-lg">Aksi</th>
+            <th class="w-[15%] bg-gray-200 rounded-tr-lg">Aksi</th>
           </tr>
         </thead>
         <!-- End Table Header -->
@@ -51,9 +52,10 @@
           <tr v-for="(item, index) in items" :key="index" class="text-sm mb-16 text-center cursor-default even:bg-gray-100 duration-150">
             <td class="py-2 truncate px-1"> {{ (index + 1)  + (pagination.per_page * (pagination.current_page - 1)) }} </td>
             <td class="py-2 truncate px-1"> {{ item.nama ? item.nama : '-'  }} </td>
+            <td class="truncate px-1"> {{ item.no_telp ? item.no_telp : '-'  }} </td>
             <td class="truncate px-1"> {{ item.jenis ? item.jenis : '-'  }} </td>
             <td class="truncate px-1"> {{ item.jenis == 'uang' ? convertToCurrency(item.jumlah) : item.jumlah }} </td>
-            <td class="truncate px-1"> {{ item.created_at ? item.created_at : '-' }} </td>
+            <td class="truncate px-1"> {{ item.created_at ? timeFormatter(item.created_at) : '-' }} </td>
             <td class="truncate px-1">
               <div class="flex justify-center items-center text-black/40 space-x-4">
                 
@@ -130,7 +132,7 @@
   <!-- Modal -->
   <div v-show="modalOpen" class="absolute inset-0 flex items-center justify-center">
     <div @click="modalOpen = false" class="absolute inset-0 bg-black/50" />
-    <div class="relative bg-white w-1/3 h-1/2 z-10 rounded-lg shadow-lg">
+    <div class="relative bg-white w-1/3 h-3/5 z-10 rounded-lg shadow-lg">
 
       <!-- close button -->
       <div class="absolute top-2 right-2">
@@ -152,6 +154,9 @@
       <div class="flex flex-col w-full px-10 py-2">
         <label for="nama">Nama</label>
         <input v-model="nama" type="text" id="nama" class="ring-2 ring-trueGray-300 focus:ring-blue-600 rounded-lg p-1.5 focus:outline-none outline-none duration-150">
+
+        <label for="noTelp">Nomor Telepon</label>
+        <input v-model="noTelp" type="text" id="noTelp" class="ring-2 ring-trueGray-300 focus:ring-blue-600 rounded-lg p-1.5 focus:outline-none outline-none duration-150">
         
         <label for="jenis" class="pt-2">Jenis Zakat</label>
         <select v-model="jenis" id="jenis" class="ring-2 ring-trueGray-300  rounded-lg p-1.5 focus:outline-none outline-none duration-150">
@@ -191,7 +196,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios.js'
 import Toast from './parts/Toast.vue'
 
 export default {
@@ -209,15 +214,6 @@ export default {
       modalOpen: false,
       flashMessage: '',
 
-      axiosConfig: {
-        headers: {
-          'accept': 'application/json',
-          'Authorization': 'Bearer '+ localStorage.getItem('token')
-        },
-        timeout: 5000,
-        withCredentials: true
-      },
-
       userAccess: {
         nama: '',
         role: '',
@@ -230,6 +226,7 @@ export default {
       nama: '',
       jenis: '',
       jumlah: '',
+      noTelp: '',
       id: '',
 
       keyword: '',
@@ -257,14 +254,16 @@ export default {
       this.jenis = this.items[id].jenis
       this.jumlah = this.items[id].jumlah
       this.id = this.items[id].id
+      this.noTelp = this.items[id].no_telp
     },
 
     updateData(){
-      axios.put('http://127.0.0.1:8000/api/zakat/fitrah/' + this.id, {
+      axios.zakatAxios.put('fitrah/' + this.id, {
         nama: this.nama,
         jenis: this.jenis,
         jumlah: this.jumlah,
-      }, this.axiosConfig)
+        no_telp: this.noTelp
+      })
         
       .then(() => {
           this.getDataZakat(this.tab)
@@ -279,7 +278,7 @@ export default {
     },
 
     deleteData(id){
-      axios.delete('http://127.0.0.1:8000/api/zakat/fitrah/' + id ,this.axiosConfig)
+      axios.zakatAxios.delete('fitrah/' + id)
         
       .then(() => {
         this.getDataZakat(this.tab)
@@ -297,7 +296,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/'+params, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/'+params)
       
       .then((res) => {
         // console.log(res);
@@ -322,7 +321,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get(url, this.axiosConfig)
+      axios.zakatAxios.get(url)
       
       .then((res) => {
         // console.log(res.data);
@@ -341,7 +340,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/'+params+'/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/'+params+'/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data);
@@ -360,7 +359,7 @@ export default {
       // Is Loading
       this.isLoading = true
 
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/deleted/'+this.keyword, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/deleted/'+this.keyword)
 
       .then((res) => {
         // console.log(res.data.data)
@@ -376,7 +375,7 @@ export default {
     },
 
     restoreData(id){
-      axios.get('http://127.0.0.1:8000/api/zakat/fitrah/restore/'+id, this.axiosConfig)
+      axios.zakatAxios.get('fitrah/restore/'+id)
 
       .then(() => {
         // console.log(res);
@@ -387,6 +386,11 @@ export default {
       .catch((err) => {
         console.log(err);
       })
+    },
+
+    timeFormatter(param){
+      return new Date(param)
+            .toLocaleString('id-ID', {year: 'numeric', month: 'short', day: 'numeric', weekday: 'long'}) 
     },
 
     toast(text, timeout = null){

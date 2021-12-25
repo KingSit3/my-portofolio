@@ -66,9 +66,19 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
             <router-link to="/calculate" class="shadow-red py-10 w-3/4 bg-purple-700 rounded-lg text-center">Calculate</router-link>
             <router-link to="/zakatadmin" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Admin</router-link>
+            <router-link to="/zakatsearch" class="py-10 w-3/4 bg-purple-700 rounded-lg text-center">Zakat Search</router-link>
         </div> 
       </div>
       <!-- End Zakat Project -->
+
+      <!-- Restoran Project -->
+      <div class="my-10 text-center space-y-3">
+        <span class="text-3xl font-bold">Restoran</span>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-9 font-bold justify-items-center">
+            <router-link to="/restoran/admin" class="shadow-red py-10 w-3/4 bg-purple-700 rounded-lg text-center">Restoran Admin</router-link>
+        </div>
+      </div>
+      <!-- End Restoran Project -->
 
       <!-- Project -->
       <div class="my-10 text-center space-y-3">

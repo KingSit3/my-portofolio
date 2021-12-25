@@ -16,6 +16,18 @@
           </div>
           <!-- End Textbox Pezakat -->
 
+          <div class="flex flex-col">
+            <label for="no_telp">No Telp</label>
+            <input 
+              id="no_telp"
+              v-model="noTelp" 
+              type="number" 
+              placeholder="085xxxxx"
+              class="w-[200px] ring-2 ring-trueGray-300 focus:ring-[#1dad52] rounded-lg px-3 p-1.5 focus:outline-none outline-none duration-150" 
+            >
+          </div>
+          <!-- End Textbox Pezakat -->
+
           <!-- Textbox Jumlah Zakat -->
           <div class="flex flex-col">
             <label for="jumlahZakat">Jumlah Zakat {{ secondaryTabProp }} </label>
@@ -76,7 +88,7 @@
 
       <!-- Button -->
       <div class="flex justify-end space-x-5 mt-10">
-        <button  @click="pezakat = []; saveDataStatus = {}" class="font-semibold hover:opacity-50 duration-150">Reset</button>
+        <button  @click="pezakat = []; saveDataStatus = {}; noTelp = null" class="font-semibold hover:opacity-50 duration-150">Reset</button>
         <button 
           v-show="saveDataStatus.success == null && saveDataStatus.fail == null" 
           @click="saveData()" 
@@ -116,6 +128,7 @@ export default {
     return {
       nama: '',
       jumlahZakat: '',
+      noTelp: null,
       pezakat: [],
       saveDataStatus: {
         loading: false,
@@ -157,6 +170,7 @@ export default {
         
         axios.post('http://127.0.0.1:8000/api/zakat/fitrah',{
           nama: this.pezakat[i].pezakat,
+          no_telp: this.noTelp,
           jenis: this.pezakat[i].tipeZakat,
           jumlah: this.pezakat[i].jumlahZakat
         })
