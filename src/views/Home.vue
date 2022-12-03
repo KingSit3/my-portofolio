@@ -107,7 +107,7 @@
 
             <!-- Contents -->
             <div class="flex justify-center flex-wrap gap-10">
-              <a v-for="(item, index) in futureStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
+              <a v-for="(item, index) in usedProgrammingLanguage" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
                 <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
               </a>
             </div>
@@ -178,7 +178,7 @@
 
 <script lang="ts" setup>
 import Card from '@/components/Card.vue';
-import type {DataInterface, UsedTechs, TechStackInterface} from '@/interface/GeneralInterfaces';
+import type {DataInterface, TechStackInterface} from '@/interface/GeneralInterfaces';
 
 
   const worksData: Array<DataInterface> = [
