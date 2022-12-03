@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-slate-800 text-slate-300 min-h-screen h-full">
-    <div class="container mx-auto py-10">
+  <div class="bg-slate-800 text-slate-300 min-h-screen h-full px-20">
+    <div class="container mx-auto">
 
       <!-- About Me Section-->
-      <section class="w-full flex flex-col justify-center items-center">
+      <div class="w-full flex flex-col justify-center items-center py-20">
         <div>
-
+  
           <!-- Name -->
           <div class="text-left">
             <p class="">Hello, my name is</p>
@@ -25,7 +25,7 @@
               </a>
             </li>
             <!-- End Linkedin-->
-
+  
             <!-- Github-->
             <li>
               <a href="https://github.com/KingSit3" target="_blank" class="hover:opacity-50 duration-200">
@@ -35,57 +35,287 @@
               </a>
             </li>
             <!-- End Github-->
-
+  
           </div>
           <!-- End Links -->
-
+  
         </div>
-      </section>
+      </div>
       <!-- End About Me Section-->
 
-      <!-- Works -->
-      <section class="px-20 pt-10">
+      <main class="flex justify-between gap-5">
+  
+        <!-- Left Section -->
+        <aside class="w-1/5">
+          <div class="rounded-xl sticky left-20 top-10 bottom-10 bg-neutral-800 p-5 border-b-2 border-r-2 border-purple-500">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere cum accusantium eligendi totam! Culpa, quia quis velit minima accusantium, molestias ipsum fugit delectus voluptatem ad deleniti harum voluptas commodi sint!
+          </div>
+        </aside>
+        <!-- End Left Section -->
+    
+        <!-- Right Section -->
+        <div class="w-4/5 space-y-10 pb-10">
 
-        <!-- Top -->
-        <div class="w-fit pr-10 border-b-2 border-purple-500">
-          <h2 class="font-bold text-xl">My Works</h2>
+          <!-- Tech Stack -->
+          <section id="techStack" class="px-20 space-y-5">
+
+            <!-- Top -->
+            <div class="w-fit pr-10 border-b-2 border-purple-500">
+              <h2 class="font-bold text-xl">My Tech Stack</h2>
+            </div>
+            <!-- End Top -->
+
+            <!-- Contents -->
+            <div class="flex flex-col">
+
+              <!-- Current Tech Stack -->
+              <div class="space-y-2">
+                <p class="font-semibold">Current:</p>
+                <div class="flex gap-5">
+                  <a v-for="(item, index) in currentStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
+                    <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
+                  </a>
+                </div>
+              </div>
+              <!-- End Current Tech Stack -->
+
+              <!-- Future Tech Stack -->
+              <div class="flex flex-col w-full justify-end items-end space-y-2">
+                <p class="font-semibold">Future:</p>
+                <div class="flex gap-5">
+                  <a v-for="(item, index) in futureStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
+                    <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
+                  </a>
+                </div>
+              </div>
+              <!-- End Future Tech Stack -->
+
+            </div>
+            <!-- End Contents -->
+
+          </section>
+          <!-- End Tech Stack -->
+
+          <!-- Programming Language / Frameworks -->
+          <section id="tech" class="px-20 space-y-5">
+
+            <!-- Top -->
+            <div class="w-fit pr-10 border-b-2 border-purple-500">
+              <h2 class="font-bold text-xl">Used Programming Language / Framework </h2>
+            </div>
+            <!-- End Top -->
+
+            <!-- Contents -->
+            <div class="flex justify-center flex-wrap gap-10">
+              <a v-for="(item, index) in futureStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
+                <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
+              </a>
+            </div>
+            <!-- End Contents -->
+
+          </section>
+          <!-- End Programming Language / Frameworks -->
+    
+          <!-- Works -->
+          <section id="works" class="px-20 space-y-5">
+    
+            <!-- Top -->
+            <div class="w-fit pr-10 border-b-2 border-purple-500">
+              <h2 class="font-bold text-xl">My Works</h2>
+            </div>
+            <!-- End Top -->
+    
+            <!-- Contents -->
+            <div class="grid grid-cols-2 gap-5">
+    
+              <!-- Card -->
+              <Card v-for="(item, index) in worksData" :key="index" :item="item" />
+              <!-- End Card -->
+    
+            </div>
+            <!-- End Contents -->
+    
+          </section>
+          <!-- End Works -->
+    
+          <!-- Projects -->
+          <section id="projects" class="px-20 space-y-5">
+    
+            <!-- Top -->
+            <div class="w-fit pr-10 border-b-2 border-purple-500">
+              <h2 class="font-bold text-xl">My Projects</h2>
+            </div>
+            <!-- End Top -->
+
+             <!-- Contents -->
+             <div class="grid grid-cols-2 gap-5">
+    
+              <!-- Card -->
+              <Card v-for="(item, index) in projectsData" :key="index" :item="item" />
+              <!-- End Card -->
+
+            </div>
+            <!-- End Contents -->
+    
+          </section>
+          <!-- End Projects -->
+    
         </div>
-        <!-- End Top -->
+        <!-- End Right Section -->
+  
+      </main>
 
-        <!-- Content -->
-        <div class="">
-
-
-
-        </div>
-        <!-- End Content -->
-
-      </section>
-      <!-- End Works -->
+      <footer class="flex items-center justify-center gap-1 text-sm font-semibold py-5">
+        <span>Made with ❤️ using </span>
+        <img src="/images/tech/vue.png" alt="Vue" class="h-4">
+        &#38;
+        <img src="/images/tech/tailwind.png" alt="Tailwind" class="h-4">
+      </footer>
 
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-
-  interface usedTechInterface {
-    
-  }
-
-  interface WorksDataInterface {
-    link: string
-    externalLink: boolean
-    title: string
-    image: string
+import Card from '@/components/Card.vue';
+import type {DataInterface, UsedTechs, TechStackInterface} from '@/interface/GeneralInterfaces';
 
 
-  }
-
-  const worksData: Array<WorksDataInterface>= [
+  const worksData: Array<DataInterface> = [
     {
-      externalLink: false,
-      link: "asd"
-    }
+      link: "https://foryou.io/",
+      image: '/images/work/foryou.png',
+      title: 'Foryou',
+      usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
+    },
+    {
+      link: "https://centralstore.co.id",
+      image: '/images/work/centralstore.png',
+      title: 'Central Store',
+      usedTech: ['tailwind', 'nuxt']
+    },
+    {
+      link: "https://kapzet.id/",
+      image: '/images/work/kapzet.png',
+      title: 'Kapzet',
+      usedTech: ['tailwind', 'nuxt']
+    },
+    {
+      link: "https://sempoa.id/",
+      image: '/images/work/sempoa-web.png',
+      title: 'Sempoa Landing Page',
+      usedTech: ['tailwind', 'nuxt']
+    },
+    {
+      link: "http://hatisuci.or.id/",
+      image: '/images/work/hati-suci.png',
+      title: 'Yayasan Hati Suci',
+      usedTech: ['tailwind', 'laravel', 'mysql']
+    },
+    {
+      link: "https://erp.sempoa.id/login",
+      image: '/images/work/sempoa-erp.png',
+      title: 'Sempoa - ERP',
+      usedTech: ['tailwind', 'typescript', 'vue']
+    },
   ]
+
+  const projectsData: Array<DataInterface> = [
+    {
+      link: "https://foryou.io/",
+      image: '/images/work/foryou.png',
+      title: 'Foryou',
+      usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
+    },
+  ]
+
+  const currentStack: Array<TechStackInterface> = [
+    {
+      link: 'https://laravel.com/',
+      title: "laravel",
+    },
+    {
+      link: 'https://www.mysql.com/',
+      title: "mysql",
+    },
+    {
+      link: 'https://tailwindcss.com/',
+      title: "tailwind",
+    },
+    {
+      link: 'https://nuxtjs.org/',
+      title: "nuxt",
+    },
+    {
+      link: 'https://www.javascript.com/',
+      title: "javascript",
+    },
+  ]
+
+  const futureStack: Array<TechStackInterface> = [
+    {
+      link: 'https://go.dev/',
+      title: "go",
+    },
+    {
+      link: 'https://www.mysql.com/',
+      title: "mysql",
+    },
+    {
+      link: 'https://tailwindcss.com/',
+      title: "tailwind",
+    },
+    {
+      link: 'https://nuxtjs.org/',
+      title: "nuxt",
+    },
+    {
+      link: 'https://www.typescriptlang.org/',
+      title: "typescript",
+    },
+  ]
+
+  const usedProgrammingLanguage: Array<TechStackInterface> = [
+    {
+      link: 'https://getbootstrap.com/',
+      title: 'bootstrap',
+    },
+    {
+      link: 'https://go.dev/',
+      title: 'go',
+    },
+    {
+      link: 'https://www.javascript.com/',
+      title: 'javascript',
+    },
+    {
+      link: 'https://laravel.com/',
+      title: 'laravel',
+    },
+    {
+      link: 'https://www.mysql.com/',
+      title: 'mysql',
+    },
+    {
+      link: 'https://nuxtjs.org/',
+      title: 'nuxt',
+    },
+    {
+      link: 'https://www.php.net/',
+      title: 'php',
+    },
+    {
+      link: 'https://tailwindcss.com/',
+      title: 'tailwind',
+    },
+    {
+      link: 'https://www.typescriptlang.org/',
+      title: 'typescript',
+    },
+    {
+      link: 'https://vuejs.org/',
+      title: 'vue',
+    },
+  ]
+
 </script>
