@@ -163,8 +163,10 @@
              <div class="grid grid-cols-2 gap-5">
     
               <!-- Card -->
-              <Card v-for="(item, index) in projectsData" :key="index" :item="item" />
+              <!-- <Card v-for="(item, index) in projectsData" :key="index" :item="item" /> -->
               <!-- End Card -->
+
+              Coming soon~
 
             </div>
             <!-- End Contents -->
@@ -325,12 +327,12 @@
   ]
 
   const projectsData: Array<DataInterface> = [
-    {
-      link: "https://foryou.io/",
-      image: '/images/work/foryou.png',
-      title: 'Foryou',
-      usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
-    },
+    // {
+    //   link: "https://foryou.io/",
+    //   image: '/images/work/foryou.png',
+    //   title: 'Foryou',
+    //   usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
+    // },
   ]
 
   const scroll = (id:string) => {
