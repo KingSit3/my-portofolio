@@ -1,9 +1,9 @@
 <template>
   <div class="bg-slate-800 text-slate-300 min-h-screen h-full px-20">
-    <div class="container mx-auto">
+    <div class="container mx-auto space-y-20">
 
       <!-- About Me Section-->
-      <div class="w-full flex flex-col justify-center items-center py-20">
+      <div class="w-full flex flex-col justify-center items-center pb-20 py-40">
         <div>
   
           <!-- Name -->
@@ -47,77 +47,89 @@
   
         <!-- Left Section -->
         <aside class="w-1/5">
-          <div class="rounded-xl sticky left-20 top-10 bottom-10 bg-neutral-800 p-5 border-b-2 border-r-2 border-purple-500">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere cum accusantium eligendi totam! Culpa, quia quis velit minima accusantium, molestias ipsum fugit delectus voluptatem ad deleniti harum voluptas commodi sint!
+          <div class="rounded-xl sticky left-20 top-10 bottom-10 bg-neutral-800 p-5 border-b-2 border-r-2 border-purple-500 space-y-5">
+            <p 
+              v-for="(item, index) in getSections" 
+              :key="index" 
+              :class="[activeSection == item.id ? 'opacity-100' : 'opacity-50' ,'font-semibold capitalize duration-300 text-lg cursor-pointer']" 
+              @click="scroll(item.id)"
+            >
+            {{  item.id.split('_').join(" ") }}</p>
           </div>
         </aside>
         <!-- End Left Section -->
     
         <!-- Right Section -->
-        <div class="w-4/5 space-y-10 pb-10">
+        <div class="w-4/5 pb-10">
+          
+          <!-- Tech -->
+          <section id="my_tech_stack" class="space-y-20 py-20">
 
-          <!-- Tech Stack -->
-          <section id="techStack" class="px-20 space-y-5">
-
-            <!-- Top -->
-            <div class="w-fit pr-10 border-b-2 border-purple-500">
-              <h2 class="font-bold text-xl">My Tech Stack</h2>
-            </div>
-            <!-- End Top -->
-
-            <!-- Contents -->
-            <div class="flex flex-col">
-
-              <!-- Current Tech Stack -->
-              <div class="space-y-2">
-                <p class="font-semibold">Current:</p>
-                <div class="flex gap-5">
-                  <a v-for="(item, index) in currentStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
-                    <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
-                  </a>
-                </div>
+            <!-- Tech Stack -->
+            <div class="px-20 space-y-5">
+  
+              <!-- Top -->
+              <div class="w-fit pr-10 border-b-2 border-purple-500">
+                <h2 class="font-bold text-xl">My Tech Stack</h2>
               </div>
-              <!-- End Current Tech Stack -->
-
-              <!-- Future Tech Stack -->
-              <div class="flex flex-col w-full justify-end items-end space-y-2">
-                <p class="font-semibold">Future:</p>
-                <div class="flex gap-5">
-                  <a v-for="(item, index) in futureStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
-                    <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
-                  </a>
+              <!-- End Top -->
+  
+              <!-- Contents -->
+              <div class="flex flex-col">
+  
+                <!-- Current Tech Stack -->
+                <div class="space-y-2">
+                  <p class="font-semibold">Current:</p>
+                  <div class="flex gap-5">
+                    <a v-for="(item, index) in currentStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
+                      <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
+                    </a>
+                  </div>
                 </div>
+                <!-- End Current Tech Stack -->
+  
+                <!-- Future Tech Stack -->
+                <div class="flex flex-col w-full justify-end items-end space-y-2">
+                  <p class="font-semibold">Future:</p>
+                  <div class="flex gap-5">
+                    <a v-for="(item, index) in futureStack" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
+                      <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
+                    </a>
+                  </div>
+                </div>
+                <!-- End Future Tech Stack -->
+  
               </div>
-              <!-- End Future Tech Stack -->
-
+              <!-- End Contents -->
+  
             </div>
-            <!-- End Contents -->
+            <!-- End Tech Stack -->
+  
+            <!-- Programming Language / Frameworks -->
+            <div class="px-20 space-y-5">
+  
+              <!-- Top -->
+              <div class="w-fit pr-10 border-b-2 border-purple-500">
+                <h2 class="font-bold text-xl">Used Programming Language / Framework </h2>
+              </div>
+              <!-- End Top -->
+  
+              <!-- Contents -->
+              <div class="flex justify-center flex-wrap gap-10">
+                <a v-for="(item, index) in usedProgrammingLanguage" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
+                  <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
+                </a>
+              </div>
+              <!-- End Contents -->
+  
+            </div>
+            <!-- End Programming Language / Frameworks -->
 
           </section>
-          <!-- End Tech Stack -->
-
-          <!-- Programming Language / Frameworks -->
-          <section id="tech" class="px-20 space-y-5">
-
-            <!-- Top -->
-            <div class="w-fit pr-10 border-b-2 border-purple-500">
-              <h2 class="font-bold text-xl">Used Programming Language / Framework </h2>
-            </div>
-            <!-- End Top -->
-
-            <!-- Contents -->
-            <div class="flex justify-center flex-wrap gap-10">
-              <a v-for="(item, index) in usedProgrammingLanguage" :key="index" :href="item.link" target="_blank" class="hover:opacity-50 duration-300">
-                <img :key="index" :src="`/images/tech/${item.title}.png`" alt="Tech Image" class="h-10" :title="item.title">
-              </a>
-            </div>
-            <!-- End Contents -->
-
-          </section>
-          <!-- End Programming Language / Frameworks -->
+          <!-- End Tech -->
     
           <!-- Works -->
-          <section id="works" class="px-20 space-y-5">
+          <section id="my_works" class="px-20 py-20 space-y-5">
     
             <!-- Top -->
             <div class="w-fit pr-10 border-b-2 border-purple-500">
@@ -139,7 +151,7 @@
           <!-- End Works -->
     
           <!-- Projects -->
-          <section id="projects" class="px-20 space-y-5">
+          <section id="my_projects" class="px-20 py-20 space-y-5">
     
             <!-- Top -->
             <div class="w-fit pr-10 border-b-2 border-purple-500">
@@ -177,57 +189,12 @@
 </template>
 
 <script lang="ts" setup>
-import Card from '@/components/Card.vue';
-import type {DataInterface, TechStackInterface} from '@/interface/GeneralInterfaces';
+  import Card from '@/components/Card.vue';
+  import type {DataInterface, TechStackInterface} from '@/interface/GeneralInterfaces';
+  import { onMounted, ref } from 'vue';
 
-
-  const worksData: Array<DataInterface> = [
-    {
-      link: "https://foryou.io/",
-      image: '/images/work/foryou.png',
-      title: 'Foryou',
-      usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
-    },
-    {
-      link: "https://centralstore.co.id",
-      image: '/images/work/centralstore.png',
-      title: 'Central Store',
-      usedTech: ['tailwind', 'nuxt']
-    },
-    {
-      link: "https://kapzet.id/",
-      image: '/images/work/kapzet.png',
-      title: 'Kapzet',
-      usedTech: ['tailwind', 'nuxt']
-    },
-    {
-      link: "https://sempoa.id/",
-      image: '/images/work/sempoa-web.png',
-      title: 'Sempoa Landing Page',
-      usedTech: ['tailwind', 'nuxt']
-    },
-    {
-      link: "http://hatisuci.or.id/",
-      image: '/images/work/hati-suci.png',
-      title: 'Yayasan Hati Suci',
-      usedTech: ['tailwind', 'laravel', 'mysql']
-    },
-    {
-      link: "https://erp.sempoa.id/login",
-      image: '/images/work/sempoa-erp.png',
-      title: 'Sempoa - ERP',
-      usedTech: ['tailwind', 'typescript', 'vue']
-    },
-  ]
-
-  const projectsData: Array<DataInterface> = [
-    {
-      link: "https://foryou.io/",
-      image: '/images/work/foryou.png',
-      title: 'Foryou',
-      usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
-    },
-  ]
+  const getSections = ref()
+  const activeSection = ref<string>()
 
   const currentStack: Array<TechStackInterface> = [
     {
@@ -317,5 +284,76 @@ import type {DataInterface, TechStackInterface} from '@/interface/GeneralInterfa
       title: 'vue',
     },
   ]
+
+  const worksData: Array<DataInterface> = [
+    {
+      link: "https://foryou.io/",
+      image: '/images/work/foryou.png',
+      title: 'Foryou',
+      usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
+    },
+    {
+      link: "https://centralstore.co.id",
+      image: '/images/work/centralstore.png',
+      title: 'Central Store',
+      usedTech: ['tailwind', 'nuxt']
+    },
+    {
+      link: "https://kapzet.id/",
+      image: '/images/work/kapzet.png',
+      title: 'Kapzet',
+      usedTech: ['tailwind', 'nuxt']
+    },
+    {
+      link: "https://sempoa.id/",
+      image: '/images/work/sempoa-web.png',
+      title: 'Sempoa Landing Page',
+      usedTech: ['tailwind', 'nuxt']
+    },
+    {
+      link: "http://hatisuci.or.id/",
+      image: '/images/work/hati-suci.png',
+      title: 'Yayasan Hati Suci',
+      usedTech: ['tailwind', 'laravel', 'mysql']
+    },
+    {
+      link: "https://erp.sempoa.id/login",
+      image: '/images/work/sempoa-erp.png',
+      title: 'Sempoa - ERP',
+      usedTech: ['tailwind', 'typescript', 'vue', 'laravel', 'mysql']
+    },
+  ]
+
+  const projectsData: Array<DataInterface> = [
+    {
+      link: "https://foryou.io/",
+      image: '/images/work/foryou.png',
+      title: 'Foryou',
+      usedTech: ['tailwind', 'bootstrap', 'nuxt', 'laravel', 'mysql']
+    },
+  ]
+
+  const scroll = (id:string) => {
+    const target = document.querySelector(`#${id}`)
+    window.scrollTo({
+      top: target?.offsetTop,
+      behavior: "smooth"
+    })
+  }
+
+  onMounted(() => {
+    let observer = new IntersectionObserver(elements => {
+      elements.forEach(entry => {
+        if (entry.intersectionRatio > 0) {
+          activeSection.value = entry.target.id
+        }
+      })
+    })
+
+    getSections.value = document.querySelectorAll('section')
+    getSections.value.forEach(element => {
+      observer.observe(element)
+    });
+  })
 
 </script>

@@ -25,7 +25,6 @@
   </a>
 </template>
 <script setup lang="ts">
-  import { defineProps } from "vue";
   import type {DataInterface} from '@/interface/GeneralInterfaces';
 
   const props = defineProps<{
